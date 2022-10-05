@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants/routes/global_routes.dart';
@@ -100,7 +101,7 @@ class _OnboardPageState extends State<OnboardPage> {
                 child: currentIndex == 2
                     ? GestureDetector(
                         onTap: () {
-                          GlobalRoutes.to(context, const OnboardPage());
+                          GlobalRoutes.to(context, const EnterancePage());
                         },
                         child: Text(
                           'Get stated',
