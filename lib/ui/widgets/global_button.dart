@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../styles/colors/app_colors.dart';
 
-Widget _globalButton({
+Widget globalButton({
   required String text,
   IconData? sufixButtonIcon,
   required bool isIcon,
