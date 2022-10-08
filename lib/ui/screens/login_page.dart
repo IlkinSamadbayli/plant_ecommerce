@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/constants/routes/global_routes.dart';
 import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:plant_ecommerce/ui/screens/sign_up_screen.dart';
 
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:plant_ecommerce/ui/widgets/global_input.dart';
 
 import '../../constants/extensions/extension.dart';
 import '../../styles/colors/app_colors.dart';
+import '../widgets/global_validators.dart';
 import '../widgets/social_network_row.dart';
 
 class LoginPage extends StatefulWidget {
@@ -190,7 +193,9 @@ class _LoginPageState extends State<LoginPage> {
                         style: CustomTextStyle.tinyStyleItalic),
                     const SizedBox(width: 4),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        GlobalRoutes.to(context, const SignUp());
+                      },
                       child: Text(
                         'Sign up',
                         style: CustomTextStyle.tinyStyleBold
@@ -205,31 +210,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-}
-
-String? passValidator(password) {
-  if (password.isEmpty) {
-    return "Please fill your password";
-  }
-  if (password!.length < 8) {
-    return "Password's length should be minimum 8 character";
-  } else if (!RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(password)) {
-    return "Incorrect password";
-  } else {
-    null;
-  }
-  return null;
-}
-
-String? emailValidator(mail) {
-  if (mail == '') {
-    return "Please fill your email";
-  }
-  if (!mail!.contains('@') ||
-      !RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$').hasMatch(mail)) {
-    return "Incorrect Email";
-  } else {
-    return null;
   }
 }
