@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
+import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants/routes/global_routes.dart';
@@ -32,46 +34,20 @@ class _OnboardPageState extends State<OnboardPage> {
           setState(() {});
         },
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset('./assets/images/onboard_1.png'),
-              const Text(
-                'We provide high quality plants just for you',
-                style: TextStyle(fontSize: 40),
-                textAlign: TextAlign.center,
-              ),
-            ],
+          centerPage(
+            Image.asset('./assets/images/onboard_1.png'),
+            'We provide high quality plants just for you',
+          ),
+          centerPage(
+            Image.asset('./assets/images/onboard_2.png'),
+            "Your satisfaction is our number one priority",
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 64),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Image.asset('./assets/images/onboard_2.png'),
-                const Text(
-                  "Your satisfaction is our number one priority",
-                  style: TextStyle(fontSize: 41),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            padding: const EdgeInsets.only(top: 100),
+            child: centerPage(
               Image.asset('./assets/images/onboard_3.png'),
-              const Text(
-                "Let's Shop Your Fovarite Plants With Patea Now",
-                style: TextStyle(fontSize: 41),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 50),
-            ],
+              "Let's Shop Your Fovarite Plants With Patea Now",
+            ),
           ),
         ],
       ),
@@ -85,47 +61,48 @@ class _OnboardPageState extends State<OnboardPage> {
               child: SmoothPageIndicator(
                 controller: _pageController,
                 count: 3,
-                effect: SlideEffect(activeDotColor: AppColor.mainColor),
+                effect: SlideEffect(activeDotColor: AppColor.primaryColor),
               ),
             ),
             const SizedBox(
               height: 16,
             ),
-            Container(
-              width: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: AppColor.mainColor,
-              ),
-              child: TextButton(
-                child: currentIndex == 2
-                    ? GestureDetector(
-                        onTap: () {
-                          GlobalRoutes.to(context, const EnterancePage());
-                        },
-                        child: Text(
-                          'Get stated',
-                          style: TextStyle(
-                            color: AppColor.versionColorWhite,
-                          ),
-                        ),
-                      )
-                    : Text(
-                        'Next',
-                        style: TextStyle(color: AppColor.versionColorWhite),
-                      ),
-                onPressed: () {
-                  if (currentIndex < 2) {
-                    _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut);
-                  }
-                },
-              ),
+            globalButton(
+              text: currentIndex == 2 ? "Get Started" : "Next",
+              isIcon: false,
+              clicked: true,
+              onTap: () => currentIndex == 2
+                  ? GlobalRoutes.to(context, const EnterancePage())
+                  : _pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget centerPage(Image image, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 60,
+      vertical: 80,
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8),
+        image,
+        const SizedBox(height: 60),
+        Text(
+          text,
+          style: CustomTextStyle.standardStyleItalic,
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  );
 }

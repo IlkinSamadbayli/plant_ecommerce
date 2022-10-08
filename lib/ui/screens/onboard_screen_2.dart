@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/constants/routes/global_routes.dart';
+import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:plant_ecommerce/ui/screens/login_page.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import '../../styles/colors/app_colors.dart';
 
@@ -15,92 +18,56 @@ class EnterancePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 80),
             child: Image.asset('assets/images/login_1.png'),
           ),
-          const Text(
-            'Let\'s you in',
-            style: TextStyle(
-              fontSize: 42,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          Text('Let\'s you in', style: CustomTextStyle.largeBoldStyle),
           const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.facebook_rounded,
-                          size: 40,
-                          color: AppColor.focusColor,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Continue with Facebook',
-                          style: TextStyle(
-                              fontSize: 24, color: AppColor.textColor),
-                        ),
-                      ]),
+                centerPage(
+                  Icon(
+                    Icons.facebook_rounded,
+                    size: 40,
+                    color: AppColor.focusColor,
+                  ),
+                  'Continue with Facebok',
                 ),
-                const SizedBox(height: 32),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Image.asset('./assets/images/google.png'),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Continue with Google',
-                          style: TextStyle(
-                              fontSize: 24, color: AppColor.textColor),
-                        ),
-                      ]),
+                centerPage(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Image.asset('./assets/images/google.png'),
+                  ),
+                  'Continue with Google',
                 ),
-                const SizedBox(height: 32),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.apple_rounded,
-                          size: 40,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Continue with Apple',
-                          style: TextStyle(
-                              fontSize: 24, color: AppColor.textColor),
-                        ),
-                      ]),
+                centerPage(
+                  const Icon(
+                    Icons.apple_rounded,
+                    size: 40,
+                  ),
+                  'Continue with Apple',
                 ),
               ],
             ),
           ),
           const SizedBox(height: 32),
-          const Text(
-            'or',
-            style: TextStyle(fontSize: 18),
-          ),
+          Text('or', style: CustomTextStyle.tinyStyle),
           const SizedBox(height: 20),
           globalButton(
             text: 'Sign in with password',
             clicked: true,
-            onTap: () {},
+            onTap: () {
+              GlobalRoutes.to(context, const LoginPage());
+            },
             isIcon: false,
           ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Don\'t have an account?'),
+              Text(
+                'Don\'t have an account?',
+                style: CustomTextStyle.tinyStyleItalic,
+              ),
               const SizedBox(width: 4),
               InkWell(
                 onTap: () {
@@ -108,9 +75,8 @@ class EnterancePage extends StatelessWidget {
                 },
                 child: Text(
                   'Sign up',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.focusColor,
+                  style: CustomTextStyle.tinyStyleBold.copyWith(
+                    color: AppColor.primaryColor,
                   ),
                 ),
               )
@@ -120,4 +86,21 @@ class EnterancePage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget centerPage(Widget widget, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10),
+    child: InkWell(
+      onTap: () {},
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        widget,
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: CustomTextStyle.littleStyle,
+        ),
+      ]),
+    ),
+  );
 }

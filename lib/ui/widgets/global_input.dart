@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 
 import '../../styles/colors/app_colors.dart';
 
@@ -10,7 +11,9 @@ class GlobalInput extends StatefulWidget {
   final bool isPassword;
   final String? Function(String?)? validator;
   final bool isCorrect;
-  final Function(String) onChanged;
+  final void Function(String)? onChanged;
+  final TextEditingController controller;
+  final FocusNode textFocus;
 
   const GlobalInput({
     Key? key,
@@ -22,6 +25,8 @@ class GlobalInput extends StatefulWidget {
     this.validator,
     required this.isCorrect,
     required this.onChanged,
+    required this.controller,
+    required this.textFocus,
   }) : super(key: key);
 
   @override
@@ -29,83 +34,66 @@ class GlobalInput extends StatefulWidget {
 }
 
 class _GlobalInputState extends State<GlobalInput> {
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
-  late FocusNode emailFocus;
-  late FocusNode passwordFocus;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    emailFocus.dispose();
-    passwordFocus.dispose();
-    super.dispose();
-  }
-
   bool clicked = true;
-
-  @override
-  void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Form(
-        child: TextFormField(
-          onChanged: widget.onChanged,
-          validator: widget.validator,
-          obscureText: widget.isPassword ? clicked : false,
-          decoration: InputDecoration(
-            prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.isPassword
-                ? GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        clicked = !clicked;
-                      });
-                    },
-                    child: clicked
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                  )
-                : widget.suffixIcon,
-            labelText: widget.labelText,
-            hintText: widget.hintText,
-            hintStyle: TextStyle(color: AppColor.hintTextColor),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: AppColor.focusColor,
-              ),
+      child: TextFormField(
+        controller: widget.controller,
+        onChanged: widget.onChanged,
+        validator: widget.validator,
+        style: CustomTextStyle.tinyStyleItalic,
+        obscureText: widget.isPassword ? clicked : false,
+        decoration: InputDecoration(
+          // counterStyle: CustomTextStyle.standardStyle,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.isPassword
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      clicked = !clicked;
+                    });
+                  },
+                  child: clicked
+                      ? const Icon(Icons.visibility)
+                      : const Icon(Icons.visibility_off),
+                )
+              : widget.suffixIcon,
+          labelText: widget.labelText,
+          hintText: widget.hintText,
+          hintStyle: TextStyle(
+            color: AppColor.hintTextColor,
+            fontFamily: "Josefin Sans",
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: AppColor.focusColor,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: widget.isCorrect
-                    ? AppColor.focusColor
-                    : AppColor.errorColor,
-              ),
+          ),
+
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: widget.isCorrect
+                  ? AppColor.primaryColor
+                  : AppColor.errorColor,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: AppColor.mainColor,
-              ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color:
+                  widget.isCorrect ? AppColor.mainColor : AppColor.errorColor,
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: AppColor.errorColor,
-              ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: AppColor.errorColor,
             ),
-            focusColor: AppColor.focusColor,
           ),
         ),
       ),
