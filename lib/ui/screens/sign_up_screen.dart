@@ -9,6 +9,7 @@ import '../widgets/global_button.dart';
 import '../widgets/global_input.dart';
 import '../widgets/global_validators.dart';
 import '../widgets/social_network_row.dart';
+import 'account_setup.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({
@@ -51,6 +52,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
@@ -86,13 +88,14 @@ class _SignUpState extends State<SignUp> {
                     }
                   },
                   textFocus: emailFocus,
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),
                 GlobalInput(
                   labelText: "Your password",
                   controller: passwordController,
                   isPassword: true,
-                  validator: passValidator,
+                  validator: passwordValidator,
                   prefixIcon: const Icon(Icons.lock),
                   isCorrect: isTruePassword,
                   onChanged: (password) {
@@ -105,6 +108,7 @@ class _SignUpState extends State<SignUp> {
                     }
                   },
                   textFocus: passwordFocus,
+                  keyboardType: TextInputType.text,
                 ),
               ]),
               Row(
@@ -132,14 +136,11 @@ class _SignUpState extends State<SignUp> {
                 isIcon: false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    print("true");
+                    GlobalRoutes.to(context, const AccountSetup());
                   } else {
-                    print("error");
                     context.snackbarErrorMessage;
                   }
                 },
-
-                // GlobalRoutes.to(context, const AccountSetup());
               ),
               const SizedBox(height: 24),
               Text(
