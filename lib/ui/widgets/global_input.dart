@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 
 import '../../styles/colors/app_colors.dart';
@@ -9,6 +10,7 @@ class GlobalInput extends StatefulWidget {
   final Icon? prefixIcon;
   final Icon? suffixIcon;
   final bool isPassword;
+  final TextInputType keyboardType;
   final String? Function(String?)? validator;
   final bool isCorrect;
   final void Function(String)? onChanged;
@@ -22,6 +24,7 @@ class GlobalInput extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     required this.isPassword,
+    required this.keyboardType,
     this.validator,
     required this.isCorrect,
     required this.onChanged,
@@ -34,12 +37,17 @@ class GlobalInput extends StatefulWidget {
 }
 
 class _GlobalInputState extends State<GlobalInput> {
+  final formKey = GlobalKey<FormState>();
+
   bool clicked = true;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 32,
+        vertical: 8,
+      ),
       child: TextFormField(
         controller: widget.controller,
         onChanged: widget.onChanged,
@@ -85,8 +93,9 @@ class _GlobalInputState extends State<GlobalInput> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color:
-                  widget.isCorrect ? AppColor.mainColor : AppColor.errorColor,
+              color: widget.isCorrect
+                  ? AppColor.primaryColor
+                  : AppColor.errorColor,
             ),
           ),
           errorBorder: OutlineInputBorder(

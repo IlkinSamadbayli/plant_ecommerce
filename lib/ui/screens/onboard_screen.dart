@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/styles/text_style/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
+import 'package:plant_ecommerce/ui/screens/account_setup.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -72,7 +72,7 @@ class _OnboardPageState extends State<OnboardPage> {
               isIcon: false,
               clicked: true,
               onTap: () => currentIndex == 2
-                  ? GlobalRoutes.to(context, const EnterancePage())
+                  ? GlobalRoutes.to(context, const AccountSetup())
                   : _pageController.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut),

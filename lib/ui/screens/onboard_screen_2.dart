@@ -4,6 +4,7 @@ import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/login_page.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import '../../styles/colors/app_colors.dart';
+import 'sign_up_screen.dart';
 
 class EnterancePage extends StatelessWidget {
   const EnterancePage({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class EnterancePage extends StatelessWidget {
               const SizedBox(width: 4),
               InkWell(
                 onTap: () {
-                  // GlobalRoutes.to(context, const SignUp());
+                  GlobalRoutes.to(context, const SignUp());
                 },
                 child: Text(
                   'Sign up',

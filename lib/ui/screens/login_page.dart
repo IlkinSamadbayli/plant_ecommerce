@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   "Login to Your Account",
                   style: CustomTextStyle.standardStyle,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 Column(children: [
                   GlobalInput(
                     labelText: "Your email",
@@ -90,13 +90,13 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                     textFocus: emailFocus,
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: 16),
                   GlobalInput(
                     labelText: "Your password",
                     controller: passwordController,
                     isPassword: true,
-                    validator: passValidator,
+                    validator: passwordValidator,
                     prefixIcon: const Icon(Icons.lock),
                     isCorrect: isTruePassword,
                     onChanged: (password) {
@@ -109,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                     textFocus: passwordFocus,
+                    keyboardType: TextInputType.text,
                   ),
                 ]),
                 Row(
@@ -135,9 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   clicked: true,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      print("true");
                     } else {
-                      print("error");
                       context.snackbarErrorMessage;
                     }
                   },

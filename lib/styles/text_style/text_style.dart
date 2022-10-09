@@ -40,4 +40,8 @@ class CustomTextStyle {
     fontFamily: "Josefin Sans",
     fontWeight: FontWeight.bold,
   );
+  static TextStyle moreTinyStyle = const TextStyle(
+    fontSize: 14,
+    fontFamily: "Josefin Sans",
+  );
 }

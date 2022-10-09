@@ -1,4 +1,4 @@
-String? passValidator(password) {
+String? passwordValidator(password) {
   if (password.isEmpty) {
     return "Please fill your password";
   }

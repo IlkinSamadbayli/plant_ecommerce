@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension Contex on BuildContext {
+extension ContextExtension on BuildContext {
   dynamic get snackbarErrorMessage =>
       ScaffoldMessenger.of(this).showSnackBar(snackBar);
 
