@@ -11,4 +11,5 @@ extension ContextExtension on BuildContext {
           onPressed: () {},
         ),
       );
+  dynamic get goNextFocus => FocusScope.of(this).nextFocus();
 }

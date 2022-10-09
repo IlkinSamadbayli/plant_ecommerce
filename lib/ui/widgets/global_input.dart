@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/constants/extensions/extension.dart';
 
 import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 
@@ -50,6 +51,8 @@ class _GlobalInputState extends State<GlobalInput> {
       ),
       child: TextFormField(
         controller: widget.controller,
+        onEditingComplete: () => context.goNextFocus,
+        textInputAction: TextInputAction.done,
         onChanged: widget.onChanged,
         validator: widget.validator,
         style: CustomTextStyle.tinyStyleItalic,
