@@ -136,6 +136,8 @@ class _SignUpState extends State<SignUp> {
                 isIcon: false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
+                    context.snackbarSuccessMessage;
+
                     GlobalRoutes.to(context, const AccountSetup());
                   } else {
                     context.snackbarErrorMessage;

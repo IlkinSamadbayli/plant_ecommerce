@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/constants/extensions/extension.dart';
 
+import 'package:plant_ecommerce/constants/extensions/extension.dart';
 import 'package:plant_ecommerce/styles/text_style/text_style.dart';
 
 import '../../styles/colors/app_colors.dart';
@@ -50,6 +50,8 @@ class _GlobalInputState extends State<GlobalInput> {
         vertical: 8,
       ),
       child: TextFormField(
+        keyboardType: widget.keyboardType,
+        focusNode: widget.textFocus,
         controller: widget.controller,
         onEditingComplete: () => context.goNextFocus,
         textInputAction: TextInputAction.done,
@@ -88,9 +90,8 @@ class _GlobalInputState extends State<GlobalInput> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(
-              color: widget.isCorrect
-                  ? AppColor.primaryColor
-                  : AppColor.errorColor,
+              color:
+                  widget.isCorrect ? AppColor.mainColor : AppColor.errorColor,
             ),
           ),
           enabledBorder: OutlineInputBorder(
