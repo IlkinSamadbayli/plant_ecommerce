@@ -12,13 +12,19 @@ class CustomTextStyle {
     fontFamily: "Josefin Sans",
     fontStyle: FontStyle.italic,
   );
-  static TextStyle standardStyle = const TextStyle(
+  static TextStyle standardStyle = TextStyle(
     fontSize: 32,
     fontFamily: "Josefin Sans",
+    color: AppColor.numberColor,
   );
   static TextStyle littleStyle = const TextStyle(
     fontSize: 24,
     fontFamily: "Josefin Sans",
+  );
+  static TextStyle littleStyleItalic = const TextStyle(
+    fontSize: 24,
+    fontFamily: "Josefin Sans",
+    fontStyle: FontStyle.italic,
   );
 
   static TextStyle tinyStyle = const TextStyle(
@@ -42,6 +48,10 @@ class CustomTextStyle {
   );
   static TextStyle moreTinyStyle = const TextStyle(
     fontSize: 14,
+    fontFamily: "Josefin Sans",
+  );
+  static TextStyle hintTextStyle = TextStyle(
+    color: AppColor.hintTextColor,
     fontFamily: "Josefin Sans",
   );
 }

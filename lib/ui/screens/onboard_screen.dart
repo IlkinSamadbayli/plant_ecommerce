@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:get/get.dart';
+import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../constants/routes/global_routes.dart';
 import '../../styles/colors/app_colors.dart';
 
 class OnboardPage extends StatefulWidget {
@@ -64,15 +65,13 @@ class _OnboardPageState extends State<OnboardPage> {
                 effect: SlideEffect(activeDotColor: AppColor.primaryColor),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            globalButton(
+            AppSize.sizeHeight16,
+            GlobalButton(
               text: currentIndex == 2 ? "Get Started" : "Next",
               isIcon: false,
               clicked: true,
               onTap: () => currentIndex == 2
-                  ? GlobalRoutes.to(context, const EnterancePage())
+                  ? Get.to(() => const EnterancePage())
                   : _pageController.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut),
@@ -94,9 +93,9 @@ Widget centerPage(Image image, String text) {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(height: 8),
+        AppSize.sizeHeight8,
         image,
-        const SizedBox(height: 60),
+        AppSize.sizeHeight60,
         Text(
           text,
           style: CustomTextStyle.standardStyleItalic,

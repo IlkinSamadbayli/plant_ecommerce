@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
+import 'package:plant_ecommerce/styles/styles/border_style.dart';
+
+ThemeData get appTheme {
+  return ThemeData(
+    primaryColor: AppColor.primaryColor,
+    primarySwatch: buildMaterialColor(AppColor.primaryColor),
+    scaffoldBackgroundColor: AppColor.versionColorWhite,
+    fontFamily: "JosefinSans",
+  );
+}
+
+InputDecorationTheme get inputDecorationTheme {
+  OutlineInputBorder outlineInputBorder =
+      OutlineInputBorder(borderRadius: GlobalBorderStyle.borderRadius16);
+  return InputDecorationTheme(enabledBorder: outlineInputBorder);
+}
+
+MaterialColor buildMaterialColor(Color color) {
+  List strengths = <double>[.05];
+  Map<int, Color> swatch = {};
+  final int r = color.red, g = color.green, b = color.blue;
+
+  for (int i = 1; i < 10; i++) {
+    strengths.add(0.1 * i);
+  }
+  for (var strength in strengths) {
+    final double ds = 0.5 - strength;
+    swatch[(strength * 1000).round()] = Color.fromRGBO(
+      r + ((ds < 0 ? r : (255 - r)) * ds).round(),
+      g + ((ds < 0 ? g : (255 - g)) * ds).round(),
+      b + ((ds < 0 ? b : (255 - b)) * ds).round(),
+      1,
+    );
+  }
+  return MaterialColor(color.value, swatch);
+}

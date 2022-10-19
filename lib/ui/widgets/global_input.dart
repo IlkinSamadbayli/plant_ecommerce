@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:plant_ecommerce/constants/extensions/extension.dart';
-import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/styles/styles/border_style.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
 import '../../styles/colors/app_colors.dart';
 
@@ -17,6 +18,7 @@ class GlobalInput extends StatefulWidget {
   final void Function(String)? onChanged;
   final TextEditingController controller;
   final FocusNode textFocus;
+  final bool enabled;
 
   const GlobalInput({
     Key? key,
@@ -31,6 +33,7 @@ class GlobalInput extends StatefulWidget {
     required this.onChanged,
     required this.controller,
     required this.textFocus,
+    required this.enabled,
   }) : super(key: key);
 
   @override
@@ -50,6 +53,8 @@ class _GlobalInputState extends State<GlobalInput> {
         vertical: 8,
       ),
       child: TextFormField(
+        
+        enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         focusNode: widget.textFocus,
         controller: widget.controller,
@@ -70,44 +75,18 @@ class _GlobalInputState extends State<GlobalInput> {
                     });
                   },
                   child: clicked
-                      ? const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off),
+                      ? Icon(Icons.visibility, color: AppColor.primaryColor)
+                      : Icon(Icons.visibility_off,
+                          color: AppColor.primaryColor),
                 )
               : widget.suffixIcon,
           labelText: widget.labelText,
           hintText: widget.hintText,
-          hintStyle: TextStyle(
-            color: AppColor.hintTextColor,
-            fontFamily: "Josefin Sans",
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color: AppColor.focusColor,
-            ),
-          ),
-
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color:
-                  widget.isCorrect ? AppColor.mainColor : AppColor.errorColor,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color: widget.isCorrect
-                  ? AppColor.primaryColor
-                  : AppColor.errorColor,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(
-              color: AppColor.errorColor,
-            ),
-          ),
+          hintStyle: CustomTextStyle.hintTextStyle,
+          border: GlobalBorderStyle.borderStyle,
+          focusedBorder: GlobalBorderStyle.focusBorderStyle(widget.isCorrect),
+          enabledBorder: GlobalBorderStyle.enabledBorderStyle,
+          errorBorder: GlobalBorderStyle.errorBorderStyle,
         ),
       ),
     );

@@ -17,14 +17,14 @@ class SendRegisterEvent {
   final String email;
   final String password;
   final int age;
-  final String sex;
+  final String gender;
   final int number;
 
-  SendRegisterEvent({    
+  SendRegisterEvent({
     required this.email,
     required this.password,
     required this.age,
-    required this.sex,
+    required this.gender,
     required this.number,
   });
 }

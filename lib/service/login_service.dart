@@ -1,25 +1,28 @@
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 
-import '../constants/api_constants.dart';
-import '../model/login_success_model.dart';
 
 class LoginService {
- static Future<dynamic> loginService(
+  static Future<String> loginService(
       {required String email, required String password}) async {
-    Uri url = Uri.parse(ApiConstant.loginApiUrl);
-
-    var body = {"email": email, "password": password};
-
-    http.Response response = await http.post(url, body: body);
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      print(data);
-      return LoginSuccessModel.fromJson(data);
+    await Future.delayed(const Duration(seconds: 3));
+    if (email == "samadbayli.ilkin@gmail.com") {
+      return 'Successful login';
     } else {
-      throw Exception();
+      return throw Exception();
     }
   }
 }
+    // Uri url = Uri.parse(ApiConstant.loginApiUrl);
+
+    // var body = {"email": email, "password": password};
+
+    // http.Response response = await http.post(url, body: body);
+
+    // if (response.statusCode == 200) {
+    //   final data = jsonDecode(response.body);
+    //   print(data);
+    //   return LoginSuccessModel.fromJson(data);
+    // } else {
+    //   throw Exception();
+    // }
+

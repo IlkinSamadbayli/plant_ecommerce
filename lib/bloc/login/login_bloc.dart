@@ -12,8 +12,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEvent>((event, emit) async {
       if (event is SendLoginEvent) {
         emit(LoginLoading());
-        final result =
-            await LoginService.loginService(email:event.email,password: event.password);
+        final result = await LoginService.loginService(
+            email: event.email, password: event.password);
         if (result is LoginSuccessModel) {
           emit(LoginSuccess(loginResult: result));
         } else {

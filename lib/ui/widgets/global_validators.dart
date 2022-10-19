@@ -23,3 +23,28 @@ String? emailValidator(mail) {
     return null;
   }
 }
+
+String? numberValidator(number) {
+  if (number.length < 9) {
+    return "Incorrect number";
+  }
+  return null;
+}
+
+String? nameValidator(name) {
+  if (name!.isEmpty) {
+    return "Please Enter full name";
+  } else if (!RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(name)) {
+    return "Incorrect fullname";
+  }
+  return null;
+}
+
+String? nickValidator(name) {
+  if (name!.isEmpty) {
+    return "Enter Nickname";
+  } else if (!RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(name)) {
+    return "Incorrect nickname";
+  }
+  return null;
+}
