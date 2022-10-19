@@ -40,6 +40,12 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
   provider: ^6.0.4
+  intl_phone_number_input: ^0.7.1
+  intl: ^0.17.0
+  flutter_holo_date_picker: ^1.1.0
+  get: ^4.6.5
+
+
 
 dev_dependencies:
   flutter_test:

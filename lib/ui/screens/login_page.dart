@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/constants/routes/global_routes.dart';
-import 'package:plant_ecommerce/service/login_service.dart';
-import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:get/get.dart';
+import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/account_setup.dart';
 import 'package:plant_ecommerce/ui/screens/sign_up_screen.dart';
-
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:plant_ecommerce/ui/widgets/global_input.dart';
-
-import '../../constants/extensions/extension.dart';
+import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
+import '../../global/snackbar/snackbar.dart';
 import '../../styles/colors/app_colors.dart';
 import '../widgets/global_validators.dart';
 import '../widgets/social_network_row.dart';
@@ -63,15 +62,15 @@ class _LoginPageState extends State<LoginPage> {
             child: Expanded(
               child: Column(
                 children: [
-                  const SizedBox(height: 80),
+                  AppSize.sizeHeight80,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 110),
+                    padding: AppSize.paddHorizontal110,
                     child: Image.asset(
                       'assets/images/login_2.png',
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  AppSize.sizeHeight30,
                   Text(
                     "Login to Your Account",
                     style: CustomTextStyle.standardStyle,
@@ -79,40 +78,30 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 16),
                   Column(children: [
                     GlobalInput(
+                      enabled: true,
                       labelText: "Your email",
                       controller: mailController,
                       isPassword: false,
                       validator: emailValidator,
                       prefixIcon: const Icon(Icons.mail),
                       isCorrect: isTrueMail,
-                      onChanged: (value) {
-                        setState(() {});
-                        if (!value.contains("@") ||
-                            !RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
-                                .hasMatch(value)) {
-                          isTrueMail = false;
-                        } else {
-                          isTrueMail = true;
-                        }
+                      onChanged: (mail) {
+                        emailOnChanged(mail, isTrueMail);
                       },
                       textFocus: emailFocus,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     GlobalInput(
+                      enabled: true,
                       labelText: "Your password",
                       controller: passwordController,
                       isPassword: true,
                       validator: passwordValidator,
                       prefixIcon: const Icon(Icons.lock),
                       isCorrect: isTruePassword,
-                      onChanged: (value) {
+                      onChanged: (p0) {
+                        emailOnChanged(p0, isTruePassword);
                         setState(() {});
-                        if (value.length < 8 ||
-                            !RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(value)) {
-                          isTruePassword = false;
-                        } else {
-                          isTruePassword = true;
-                        }
                       },
                       textFocus: passwordFocus,
                       keyboardType: TextInputType.text,
@@ -137,35 +126,35 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  globalButton(
+                  GlobalButton(
                     text: 'Sign in',
                     clicked: true,
                     isIcon: false,
-                    onTap: () {
+                    onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        GlobalRoutes.to(context, const AccountSetup());
-                        context.snackbarSuccessMessage;
+                        {
+                          Get.off(const AccountSetup());
+                          context.snackbarSuccessMessage;
+                        }
                       } else {
-                        // GlobalRoutes.to(context, const AccountSetup());
-
                         context.snackbarErrorMessage;
                       }
                     },
                   ),
-                  const SizedBox(height: 32),
+                  AppSize.sizeHeight32,
                   InkWell(
                     child: Text(
                       'Forgot the password?',
                       style: CustomTextStyle.tinyStyleItalic,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  AppSize.sizeHeight16,
                   Text(
                     'or continue with',
                     style: CustomTextStyle.tinyStyleGray,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: AppSize.paddingAll24,
                     child: Row(
                       children: [
                         socialNetworkRow(
@@ -201,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(width: 4),
                       InkWell(
                         onTap: () {
-                          GlobalRoutes.to(context, const SignUp());
+                          Get.to(const SignUp());
                         },
                         child: Text(
                           'Sign up',

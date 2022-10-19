@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/constants/extensions/extension.dart';
-import 'package:plant_ecommerce/styles/text_style/text_style.dart';
+import 'package:get/get.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/login_page.dart';
-
-import '../../constants/routes/global_routes.dart';
+import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
 import '../../styles/colors/app_colors.dart';
 import '../widgets/global_button.dart';
 import '../widgets/global_input.dart';
@@ -71,27 +71,24 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(height: 24),
               Column(children: [
                 GlobalInput(
+                  enabled: true,
                   labelText: "Your email",
                   controller: mailController,
                   isPassword: false,
                   validator: emailValidator,
                   prefixIcon: const Icon(Icons.mail),
                   isCorrect: isTrueMail,
-                  onChanged: (mail) {
-                    setState(() {});
-                    if (!mail.contains("@") ||
-                        !RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
-                            .hasMatch(mail)) {
-                      isTrueMail = false;
-                    } else {
-                      isTrueMail = true;
-                    }
+                  onChanged: (email) {
+                    setState(() {
+                      emailOnChanged(email, isTrueMail);
+                    });
                   },
                   textFocus: emailFocus,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),
                 GlobalInput(
+                  enabled: true,
                   labelText: "Your password",
                   controller: passwordController,
                   isPassword: true,
@@ -99,13 +96,9 @@ class _SignUpState extends State<SignUp> {
                   prefixIcon: const Icon(Icons.lock),
                   isCorrect: isTruePassword,
                   onChanged: (password) {
-                    setState(() {});
-                    if (password.length < 8 ||
-                        !RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(password)) {
-                      isTruePassword = false;
-                    } else {
-                      isTruePassword = true;
-                    }
+                    setState(() {
+                      passwordOnChanged(password, isTruePassword);
+                    });
                   },
                   textFocus: passwordFocus,
                   keyboardType: TextInputType.text,
@@ -130,15 +123,14 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ],
               ),
-              globalButton(
+              GlobalButton(
                 text: 'Sign up',
                 clicked: true,
                 isIcon: false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.snackbarSuccessMessage;
-
-                    GlobalRoutes.to(context, const AccountSetup());
+                    Get.to(const AccountSetup());
                   } else {
                     context.snackbarErrorMessage;
                   }
@@ -186,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(width: 4),
                   InkWell(
                     onTap: () {
-                      GlobalRoutes.to(context, const LoginPage());
+                      Get.to(const LoginPage());
                     },
                     child: Text(
                       'Sign in',

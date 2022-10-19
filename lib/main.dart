@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:plant_ecommerce/bloc/login/login_bloc.dart';
-import 'package:plant_ecommerce/ui/screens/onboard_screen.dart';
+import 'package:plant_ecommerce/themes/app_themes.dart';
+import 'package:plant_ecommerce/ui/screens/account_setup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) => LoginBloc(),
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const OnboardPage(),
+        title: 'Plant-Ecommerce',
+        theme: appTheme,
+        home: const AccountSetup(),
       ),
     );
   }

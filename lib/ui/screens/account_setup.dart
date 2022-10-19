@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/constants/extensions/extension.dart';
-import 'package:plant_ecommerce/styles/text_style/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/login_page.dart';
+import 'package:flutter_holo_date_picker/date_picker_theme.dart';
+import 'package:flutter_holo_date_picker/widget/date_picker_widget.dart';
+import 'package:get/get.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/styles/styles/border_style.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
+import 'package:plant_ecommerce/themes/app_themes.dart';
+import 'package:plant_ecommerce/ui/screens/lock_screen/lock_screen.dart';
+import 'package:plant_ecommerce/ui/widgets/gender_selection.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:plant_ecommerce/ui/widgets/global_input.dart';
+import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
 
 import '../../constants/routes/global_routes.dart';
 import '../../styles/colors/app_colors.dart';
@@ -17,10 +26,13 @@ class AccountSetup extends StatefulWidget {
 }
 
 class _AccountSetupState extends State<AccountSetup> {
+  String initialCountry = 'NG';
+  PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController mailController;
   late TextEditingController nameController;
+  late TextEditingController nickController;
   late TextEditingController dateController;
   late TextEditingController numberController;
   late TextEditingController genderController;
@@ -28,30 +40,51 @@ class _AccountSetupState extends State<AccountSetup> {
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
   late FocusNode nameFocus;
+  late FocusNode nickFocus;
   late FocusNode dateFocus;
   late FocusNode genderFocus;
   late FocusNode numberFocus;
   bool isCorrectMail = false;
   bool isCorrectPassword = false;
   bool isCorrectName = false;
-  bool isCorrectDate = false;
+  bool isCorrectNick = false;
+  bool isCorrectNumber = false;
   late bool checkboxOne = false;
   late bool checkboxTwo = false;
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 
   @override
   void initState() {
     mailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
-    dateController = TextEditingController();
+    nickController = TextEditingController();
+    dateController =
+        TextEditingController(text: selectedDate.toString().split(' ')[0]);
     genderController = TextEditingController();
     numberController = TextEditingController();
     emailFocus = FocusNode();
     passwordFocus = FocusNode();
     nameFocus = FocusNode();
+    nickFocus = FocusNode();
     dateFocus = FocusNode();
     genderFocus = FocusNode();
     numberFocus = FocusNode();
+    selectedDate = DateTime(1995, 6, 10);
     super.initState();
   }
 
@@ -59,6 +92,14 @@ class _AccountSetupState extends State<AccountSetup> {
   void dispose() {
     mailController.dispose();
     passwordController.dispose();
+    nameController.dispose();
+    nickController.dispose();
+    dateController.dispose();
+    numberController.dispose();
+    nameFocus.dispose();
+    nickFocus.dispose();
+    dateFocus.dispose();
+    numberFocus.dispose();
     emailFocus.dispose();
     passwordFocus.dispose();
     super.dispose();
@@ -90,13 +131,10 @@ class _AccountSetupState extends State<AccountSetup> {
                           size: 30,
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      const Text(
+                      AppSize.sizeWidth10,
+                      Text(
                         'Fill Your Profile',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: CustomTextStyle.standardStyle,
                       ),
                     ],
                   ),
@@ -114,17 +152,18 @@ class _AccountSetupState extends State<AccountSetup> {
                       ),
                       child: Image.asset(
                         './assets/images/avatar.jpeg',
+                        color: AppColor.hintTextColor,
                       ),
                     ),
                     Positioned(
-                      right: 120,
-                      bottom: 15,
+                      right: 130,
+                      bottom: 20,
                       child: Container(
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: AppColor.mainColor,
+                          borderRadius: GlobalBorderStyle.borderRadius12,
+                          color: AppColor.primaryColor,
                         ),
                         child: IconButton(
                           highlightColor: AppColor.highlightColor,
@@ -140,87 +179,151 @@ class _AccountSetupState extends State<AccountSetup> {
                   ],
                 ),
                 GlobalInput(
+                  enabled: true,
                   labelText: "Full Name",
                   isPassword: false,
-                  validator: (name) {
-                    if (name!.isEmpty) {
-                      return "Please Enter name";
-                    } else if (!RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(name)) {
-                      return "Incorrect name";
-                    }
-                    return null;
-                  },
+                  validator: nameValidator,
                   controller: nameController,
                   isCorrect: isCorrectName,
                   onChanged: (name) {
-                    setState(() {});
-                    if (name.isEmpty ||
-                        !RegExp(r'^[A-Z a-z 0-9]+$').hasMatch(name)) {
-                      isCorrectName = false;
-                    } else {
-                      isCorrectName = true;
-                    }
+                    setState(() {
+                      nameOnChanged(name, isCorrectName);
+                    });
                   },
                   textFocus: nameFocus,
                   keyboardType: TextInputType.name,
                 ),
                 GlobalInput(
-                  labelText: "Date Of Birth",
-                  suffixIcon: const Icon(Icons.date_range),
+                  enabled: true,
+                  labelText: "Nickname",
                   isPassword: false,
-                  validator: (date) {
-                    if (date!.isEmpty) {
-                      return "Please Enter Birthday";
-                    }
-                    return null;
+                  validator: nickValidator,
+                  controller: nickController,
+                  isCorrect: isCorrectNick,
+                  onChanged: (name) {
+                    setState(() {
+                      nameOnChanged(name, isCorrectNick);
+                    });
                   },
-                  controller: dateController,
-                  isCorrect: isCorrectDate,
-                  onChanged: (date) {
-                    setState(() {});
-                    if (date.isEmpty) {
-                      isCorrectDate = false;
-                    } else {
-                      isCorrectDate = true;
-                    }
+                  textFocus: nickFocus,
+                  keyboardType: TextInputType.name,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      shape: const BeveledRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40),
+                        ),
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        GlobalBorderStyle.borderRadius40),
+                                padding: AppSize.paddHorizontal25,
+                                child: DatePickerWidget(
+                                    initialDate: DateTime.now(),
+                                    onConfirm: (dateTime, selectedIndex) {},
+                                    looping: false, // default is not looping
+                                    firstDate: DateTime(
+                                        1920 - 01 - 01), //DateTime(1960),
+                                    lastDate: DateTime.now(),
+                                    dateFormat: "yyyy/MMMM/dd",
+                                    onChange: (DateTime currentDate, _) {
+                                      setState(() {
+                                        dateController.text = currentDate
+                                            .toString()
+                                            .split(' ')[0];
+                                      });
+                                    },
+                                    pickerTheme: DateTimePickerTheme(
+                                      itemTextStyle:
+                                          CustomTextStyle.littleStyle,
+                                    )
+                                    //  DateTimePickerTheme(
+                                    //   backgroundColor: AppColor.primaryColor,
+                                    //   itemTextStyle: CustomTextStyle.tinyStyle
+                                    //       .copyWith(
+                                    //           color: AppColor.versionColorWhite),
+                                    //   dividerColor: AppColor.versionColorWhite,
+                                    // ),
+                                    ),
+                              ),
+                              AppSize.sizeHeight40,
+                              GlobalButton(
+                                text: "Select birthday",
+                                isIcon: false,
+                                clicked: true,
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
                   },
-                  textFocus: dateFocus,
-                  keyboardType: TextInputType.number,
+                  child: GlobalInput(
+                    suffixIcon: Icon(
+                      Icons.date_range,
+                      color: AppColor.primaryColor,
+                    ),
+                    labelText: 'Date of Birth',
+                    isPassword: false,
+                    keyboardType: TextInputType.number,
+                    isCorrect: true,
+                    onChanged: (date) {},
+                    controller: dateController,
+                    textFocus: dateFocus,
+                    enabled: false,
+                  ),
                 ),
                 GlobalInput(
+                  enabled: true,
                   labelText: "Your email",
                   controller: mailController,
                   isPassword: false,
                   validator: emailValidator,
-                  prefixIcon: const Icon(Icons.mail),
+                  prefixIcon: Icon(Icons.mail, color: AppColor.primaryColor),
                   isCorrect: isCorrectMail,
                   onChanged: (mail) {
-                    setState(() {});
-                    if (!mail.contains("@") ||
-                        !RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
-                            .hasMatch(mail)) {
-                      isCorrectMail = false;
-                    } else {
-                      isCorrectMail = true;
-                    }
+                    setState(() {
+                      emailOnChanged(mail, isCorrectMail);
+                    });
                   },
                   textFocus: emailFocus,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                GlobalInput(
-                  labelText: "Phone Number",
-                  prefixIcon: const Icon(Icons.flag),
-                  isPassword: false,
-                  validator: (day) {
-                    return day!.isEmpty ? "Please Enter Email" : null;
-                  },
-                  controller: numberController,
-                  isCorrect: true,
-                  onChanged: (number) {},
-                  textFocus: numberFocus,
-                  keyboardType: TextInputType.phone,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 8,
+                  ),
+                  child: InternationalPhoneNumberInput(
+                    onInputChanged: (value) {
+                      setState(() {
+                        numberOnchanged(value, isCorrectNumber);
+                      });
+                    },
+                    keyboardType: TextInputType.number,
+                    textFieldController: numberController,
+                    hintText: "Phone Number",
+                    textStyle: CustomTextStyle.hintTextStyle,
+                    focusNode: numberFocus,
+                    validator: numberValidator,
+                    inputBorder:
+                        GlobalBorderStyle.focusBorderStyle(isCorrectNumber),
+                  ),
                 ),
-                const SizedBox(height: 16),
+                AppSize.sizeHeight16,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -230,7 +333,7 @@ class _AccountSetupState extends State<AccountSetup> {
                     ),
                     Row(
                       children: [
-                        genderColumn(
+                        GenderSelection(
                           text: "Male",
                           checkboxValue: checkboxOne,
                           ontap: (value) => setState(() {
@@ -238,7 +341,8 @@ class _AccountSetupState extends State<AccountSetup> {
                             checkboxTwo = false;
                           }),
                         ),
-                        genderColumn(
+                        AppSize.sizeWidth8,
+                        GenderSelection(
                           text: "Female",
                           checkboxValue: checkboxTwo,
                           ontap: (value) => setState(() {
@@ -250,20 +354,19 @@ class _AccountSetupState extends State<AccountSetup> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                globalButton(
+                AppSize.sizeHeight10,
+                GlobalButton(
                   text: "Continue",
                   clicked: true,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      GlobalRoutes.to(context, const LoginPage());
+                      Get.to(() => const LockScreen());
                     } else {
                       context.snackbarErrorMessage;
                     }
-                    // GlobalRoutes.to(context, const LockScreen());
                   },
                   isIcon: false,
-                )
+                ),
               ],
             ),
           ),
@@ -273,22 +376,7 @@ class _AccountSetupState extends State<AccountSetup> {
   }
 }
 
-Widget genderColumn(
-    {required String text,
-    required bool checkboxValue,
-    void Function(bool?)? ontap}) {
-  return Column(
-    children: [
-      Text(
-        text,
-        style: CustomTextStyle.moreTinyStyle,
-      ),
-      Checkbox(
-        activeColor: AppColor.primaryColor,
-        shape: const CircleBorder(),
-        value: checkboxValue,
-        onChanged: ontap,
-      ),
-    ],
-  );
-}
+// void getNumber(String phoneNumber) async {
+//   PhoneNumber number =
+//   await PhoneNumber.getRegionInfoFromPhoneNumber('707422421', 'AZE');
+// }
