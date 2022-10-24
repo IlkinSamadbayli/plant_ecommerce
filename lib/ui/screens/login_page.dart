@@ -4,6 +4,7 @@ import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/account_setup.dart';
+import 'package:plant_ecommerce/ui/screens/forgot_password/forgot_screen.dart';
 import 'package:plant_ecommerce/ui/screens/sign_up_screen.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:plant_ecommerce/ui/widgets/global_input.dart';
@@ -146,6 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   AppSize.sizeHeight32,
                   InkWell(
+                    onTap: () {
+                      Get.to(() => const ForgotPassword());
+                    },
                     child: Text(
                       'Forgot the password?',
                       style: CustomTextStyle.tinyStyleItalic,

@@ -8,13 +8,12 @@ import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/lock_screen/lock_screen.dart';
+import 'package:plant_ecommerce/ui/screens/forgot_password/lock_screen.dart';
 import 'package:plant_ecommerce/ui/widgets/gender_selection.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import 'package:plant_ecommerce/ui/widgets/global_input.dart';
 import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
 
-import '../../constants/routes/global_routes.dart';
 import '../../styles/colors/app_colors.dart';
 import '../widgets/global_validators.dart';
 
@@ -115,16 +114,13 @@ class _AccountSetupState extends State<AccountSetup> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 10,
-                  ),
+                Container(
+                  padding: AppSize.padding20x10,
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () {
-                          GlobalRoutes.back(context);
+                          Get.back();
                         },
                         icon: const Icon(
                           Icons.arrow_back,
@@ -349,7 +345,10 @@ class _AccountSetupState extends State<AccountSetup> {
                   clicked: true,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      Get.to(() => const LockScreen());
+                      Get.to(() => const LockScreen(
+                          // emailController: mailController,
+                          // phoneController: numberController,
+                          ));
                     } else {
                       context.snackbarErrorMessage;
                     }

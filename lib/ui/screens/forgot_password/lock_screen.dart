@@ -5,11 +5,11 @@ import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/home_screen.dart';
-import 'package:plant_ecommerce/ui/screens/lock_screen/otp_screen.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 
 import '../../../constants/routes/global_routes.dart';
 import '../../../styles/colors/app_colors.dart';
+import 'otp_screen.dart';
 
 class LockScreen extends StatefulWidget {
   const LockScreen({Key? key}) : super(key: key);
@@ -51,10 +51,7 @@ class LockScreenState extends State<LockScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 10,
-              ),
+              padding: AppSize.padding20x10,
               child: Row(
                 children: [
                   IconButton(
@@ -84,7 +81,7 @@ class LockScreenState extends State<LockScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+              padding: AppSize.padding50x80,
               child: DotsWidget(count: inputPinCount, dots: numberOfDots),
             ),
             AppSize.sizeHeight130,
@@ -112,7 +109,7 @@ class LockScreenState extends State<LockScreen> {
   Widget get numberpad {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(right: 32, left: 32, top: 10),
+        padding: AppSize.pad32x32x10,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
