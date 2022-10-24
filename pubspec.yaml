@@ -44,6 +44,7 @@ dependencies:
   intl: ^0.17.0
   flutter_holo_date_picker: ^1.1.0
   get: ^4.6.5
+  carousel_slider: ^4.1.1
 
 
 

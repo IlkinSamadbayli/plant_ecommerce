@@ -5,6 +5,7 @@ import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/login_page.dart';
 import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
 import '../../styles/colors/app_colors.dart';
+import '../../styles/global_assets/global_assets.dart';
 import '../widgets/global_button.dart';
 import '../widgets/global_input.dart';
 import '../widgets/global_validators.dart';
@@ -60,9 +61,7 @@ class _SignUpState extends State<SignUp> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 100),
-                child: SizedBox(
-                  child: Image.asset('assets/images/sign_up_image.jpeg'),
-                ),
+                child: Image.asset(GlobalAssets.signup),
               ),
               Text(
                 "Create Your Account",
@@ -130,7 +129,7 @@ class _SignUpState extends State<SignUp> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.snackbarSuccessMessage;
-                    Get.to(const AccountSetup());
+                    Get.to(() => const AccountSetup());
                   } else {
                     context.snackbarErrorMessage;
                   }
@@ -141,34 +140,9 @@ class _SignUpState extends State<SignUp> {
                 'or continue with',
                 style: CustomTextStyle.tinyStyleGray,
               ),
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Row(
-                  children: [
-                    socialNetworkRow(
-                      widget: Icon(
-                        Icons.facebook_rounded,
-                        color: AppColor.focusColor,
-                        size: 36,
-                      ),
-                      onTap: () {},
-                    ),
-                    socialNetworkRow(
-                      widget: Image.asset(
-                        './assets/images/google.png',
-                      ),
-                      onTap: () {},
-                    ),
-                    socialNetworkRow(
-                      widget: Icon(
-                        Icons.apple,
-                        size: 36,
-                        color: AppColor.textColor,
-                      ),
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+              const Padding(
+                padding: EdgeInsets.all(24),
+                child: SocialNetwork(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +152,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(width: 4),
                   InkWell(
                     onTap: () {
-                      Get.to(const LoginPage());
+                      Get.to(() => const LoginPage());
                     },
                     child: Text(
                       'Sign in',
