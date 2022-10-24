@@ -13,6 +13,9 @@ class GlobalAssets {
   static String card_1 = '$regressImage/card_1.png';
   static String card_2 = '$regressImage/card_2.png';
   static String card_3 = '$regressImage/card_3.png';
+  static String forgot = '$regressImage/forgot.jpg';
+  static String threeDots = '$regressImage/3dots.png';
+  static String verify = '$regressImage/verify.png';
 
   // static Image avatar =
   //     Image.asset('$regressImage/avatar.jpeg', color: AppColor.hintTextColor);
