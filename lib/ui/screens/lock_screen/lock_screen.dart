@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
+import 'package:plant_ecommerce/ui/screens/home_screen.dart';
 import 'package:plant_ecommerce/ui/screens/lock_screen/otp_screen.dart';
-import 'package:plant_ecommerce/ui/screens/sign_up_screen.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 
 import '../../../constants/routes/global_routes.dart';
@@ -95,7 +95,7 @@ class LockScreenState extends State<LockScreen> {
                 setState(() {});
                 // print(currentPin);
                 if (currentPin == '1234') {
-                  Get.to(() => const SignUp());
+                  Get.to(() => const HomeScreen());
                 } else {
                   context.snackbarErrorMessage;
                 }

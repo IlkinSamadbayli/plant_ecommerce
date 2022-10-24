@@ -5,6 +5,7 @@ import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/login_page.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
 import '../../styles/colors/app_colors.dart';
+import '../../styles/global_assets/global_assets.dart';
 import 'sign_up_screen.dart';
 
 class EnterancePage extends StatelessWidget {
@@ -18,7 +19,7 @@ class EnterancePage extends StatelessWidget {
           AppSize.sizeHeight60,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
-            child: Image.asset('assets/images/login_1.png'),
+            child: Image.asset(GlobalAssets.login_1),
           ),
           Text('Let\'s you in', style: CustomTextStyle.largeBoldStyle),
           AppSize.sizeHeight40,
@@ -58,7 +59,7 @@ class EnterancePage extends StatelessWidget {
             text: 'Sign in with password',
             clicked: true,
             onTap: () {
-              Get.to(const LoginPage());
+              Get.to(() => const LoginPage());
             },
             isIcon: false,
           ),
@@ -73,7 +74,7 @@ class EnterancePage extends StatelessWidget {
               AppSize.sizeWidth4,
               InkWell(
                 onTap: () {
-                  Get.to(const SignUp());
+                  Get.to(() => const SignUp());
                 },
                 child: Text(
                   'Sign up',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
@@ -36,17 +37,17 @@ class _OnboardPageState extends State<OnboardPage> {
         },
         children: [
           centerPage(
-            Image.asset('./assets/images/onboard_1.png'),
+            Image.asset(GlobalAssets.onboard_1),
             'We provide high quality plants just for you',
           ),
           centerPage(
-            Image.asset('./assets/images/onboard_2.png'),
+            Image.asset(GlobalAssets.onboard_2),
             "Your satisfaction is our number one priority",
           ),
           Padding(
             padding: const EdgeInsets.only(top: 100),
             child: centerPage(
-              Image.asset('./assets/images/onboard_3.png'),
+              Image.asset(GlobalAssets.onboard_3),
               "Let's Shop Your Fovarite Plants With Patea Now",
             ),
           ),

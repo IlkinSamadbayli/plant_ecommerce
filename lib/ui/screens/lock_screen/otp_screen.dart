@@ -23,7 +23,7 @@ class DotsWidget extends StatelessWidget {
 
   Widget _fillDots(i) {
     if (count > 0) {
-      initColor = AppColor.textColor;
+      initColor = AppColor.numberColor;
       count--;
     } else {
       initColor = AppColor.lightGreyColor;
@@ -32,7 +32,7 @@ class DotsWidget extends StatelessWidget {
       width: 35,
       height: 25,
       decoration: BoxDecoration(
-        border: Border.all(width: 1.5),
+        border: Border.all(width: 1),
         shape: BoxShape.circle,
         color: initColor,
       ),

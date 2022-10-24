@@ -21,6 +21,16 @@ class CustomTextStyle {
     fontSize: 24,
     fontFamily: "Josefin Sans",
   );
+  static TextStyle littleStyleGreen = TextStyle(
+    fontSize: 24,
+    fontFamily: "Josefin Sans",
+    color: AppColor.mainColor,
+  );
+  static TextStyle littleStyleBold = const TextStyle(
+    fontSize: 24,
+    fontFamily: "Josefin Sans",
+    fontWeight: FontWeight.bold,
+  );
   static TextStyle littleStyleItalic = const TextStyle(
     fontSize: 24,
     fontFamily: "Josefin Sans",
@@ -30,6 +40,17 @@ class CustomTextStyle {
   static TextStyle tinyStyle = const TextStyle(
     fontSize: 18,
     fontFamily: "Josefin Sans",
+  );
+  static TextStyle tinyStyleGreen = TextStyle(
+    fontSize: 18,
+    fontFamily: "Josefin Sans",
+    color: AppColor.mainColor,
+  );
+  static TextStyle tinyStyleGreenBold = TextStyle(
+    fontSize: 18,
+    fontFamily: "Josefin Sans",
+    color: AppColor.mainColor,
+    fontWeight: FontWeight.bold,
   );
   static TextStyle tinyStyleItalic = const TextStyle(
     fontSize: 18,
@@ -49,6 +70,16 @@ class CustomTextStyle {
   static TextStyle moreTinyStyle = const TextStyle(
     fontSize: 14,
     fontFamily: "Josefin Sans",
+  );
+  static TextStyle moreTinyStyleGreen =  TextStyle(
+    fontSize: 14,
+    fontFamily: "Josefin Sans",
+    color: AppColor.mainColor,
+  );
+  static TextStyle moreTinyStyleGray = TextStyle(
+    fontSize: 14,
+    fontFamily: "Josefin Sans",
+    color: AppColor.hintTextColor,
   );
   static TextStyle hintTextStyle = TextStyle(
     color: AppColor.hintTextColor,

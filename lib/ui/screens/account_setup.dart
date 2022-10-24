@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/themes/app_themes.dart';
 import 'package:plant_ecommerce/ui/screens/lock_screen/lock_screen.dart';
 import 'package:plant_ecommerce/ui/widgets/gender_selection.dart';
 import 'package:plant_ecommerce/ui/widgets/global_button.dart';
@@ -150,10 +150,7 @@ class _AccountSetupState extends State<AccountSetup> {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.asset(
-                        './assets/images/avatar.jpeg',
-                        color: AppColor.hintTextColor,
-                      ),
+                      child: Image.asset(GlobalAssets.avatar),
                     ),
                     Positioned(
                       right: 130,
@@ -246,15 +243,7 @@ class _AccountSetupState extends State<AccountSetup> {
                                     pickerTheme: DateTimePickerTheme(
                                       itemTextStyle:
                                           CustomTextStyle.littleStyle,
-                                    )
-                                    //  DateTimePickerTheme(
-                                    //   backgroundColor: AppColor.primaryColor,
-                                    //   itemTextStyle: CustomTextStyle.tinyStyle
-                                    //       .copyWith(
-                                    //           color: AppColor.versionColorWhite),
-                                    //   dividerColor: AppColor.versionColorWhite,
-                                    // ),
-                                    ),
+                                    )),
                               ),
                               AppSize.sizeHeight40,
                               GlobalButton(
