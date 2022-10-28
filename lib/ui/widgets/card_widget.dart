@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
-class CardWidget extends StatelessWidget {
+class CardWidget extends StatefulWidget {
   // final List<String> images = [
   //   GlobalAssets.card_1,
   //   GlobalAssets.card_2,
@@ -22,6 +23,13 @@ class CardWidget extends StatelessWidget {
     required this.rated,
     required this.price,
   }) : super(key: key);
+
+  @override
+  State<CardWidget> createState() => _CardWidgetState();
+}
+
+class _CardWidgetState extends State<CardWidget> {
+  bool favorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,7 @@ class CardWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5),
-                  child: image,
+                  child: widget.image,
                   // child: Image.asset(images[1]),
                 ),
                 AppSize.sizeHeight8,
@@ -63,7 +71,7 @@ class CardWidget extends StatelessWidget {
                     ),
                     AppSize.sizeWidth4,
                     Text(
-                      rated,
+                      widget.rated,
                       style: CustomTextStyle.tinyStyleGray,
                     ),
                     AppSize.sizeWidth8,
@@ -87,25 +95,31 @@ class CardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      " \$$price",
+                      " \$${widget.price}",
                       style: CustomTextStyle.littleStyleGreen,
                       textAlign: TextAlign.end,
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {});
+                          favorite = !favorite;
+                        },
+                        child: favorite
+                            ? const Positioned(
+                                child: Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ))
+                            : const Positioned(
+                                child:
+                                    Icon(Icons.favorite, color: Colors.white))),
                   ],
                 ),
               ],
             ),
           ),
         ),
-        const Positioned(
-          right: 16,
-          top: 16,
-          child: Icon(
-            Icons.favorite,
-            color: Colors.red,
-          ),
-        ),
-      ],
+      ]
     );
   }
 }
