@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/home_screen.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
+import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
 
 import '../../../constants/routes/global_routes.dart';
 import '../../../styles/colors/app_colors.dart';
-import 'otp_screen.dart';
+import 'widgets/otp_screen.dart';
 
 class LockScreen extends StatefulWidget {
   const LockScreen({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class LockScreenState extends State<LockScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: AppSize.paddingAll16,
               child: Text(
                 "Add a PIN number to make your account more secure.",
                 style: CustomTextStyle.tinyStyleItalic,
@@ -87,17 +87,14 @@ class LockScreenState extends State<LockScreen> {
             AppSize.sizeHeight130,
             GlobalButton(
               text: "Continue",
-              clicked: true,
               onTap: () {
                 setState(() {});
-                // print(currentPin);
                 if (currentPin == '1234') {
                   Get.to(() => const HomeScreen());
                 } else {
                   context.snackbarErrorMessage;
                 }
               },
-              isIcon: false,
             ),
             numberpad,
           ],
@@ -109,7 +106,7 @@ class LockScreenState extends State<LockScreen> {
   Widget get numberpad {
     return Expanded(
       child: Padding(
-        padding: AppSize.pad32x32x10,
+        padding: AppSize.padding32x32x10,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

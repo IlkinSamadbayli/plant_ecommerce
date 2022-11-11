@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/sizedbox.dart';
-import '../../styles/colors/app_colors.dart';
-import '../../styles/styles/border_style.dart';
-import '../../styles/styles/text_style.dart';
+import '../../../../constants/sizedbox.dart';
+import '../../../../styles/colors/app_colors.dart';
+import '../../../../styles/styles/border_style.dart';
+import '../../../../styles/styles/text_style.dart';
 
 class VerifyWidget extends StatelessWidget {
   final void Function()? ontap;

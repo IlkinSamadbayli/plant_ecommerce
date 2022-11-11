@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/widgets/global_input.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
+import 'package:provider/provider.dart';
 
-import '../widgets/card_widget.dart';
+import 'components/card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -18,9 +20,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isLiked = false;
-  bool notificationOpen = false;
-
   late FocusNode filterFocus;
   late TextEditingController filterController;
   @override
@@ -74,26 +73,30 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                    onTap: () => setState(() {
-                          notificationOpen = !notificationOpen;
-                        }),
-                    child: notificationOpen
-                        ? const Icon(Icons.notifications, size: 32)
-                        : const Icon(Icons.notifications_none_sharp, size: 32)),
-                const SizedBox(width: 16),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {});
-                    isLiked = !isLiked;
-                  },
-                  child: isLiked
-                      ? Icon(
-                          Icons.favorite,
-                          size: 32,
-                          color: AppColor.errorColor,
-                        )
-                      : const Icon(Icons.favorite_border, size: 32),
+                Consumer<AppProvider>(
+                  builder: (context, value, child) => GestureDetector(
+                      onTap: () {
+                        value.notificationAppbar;
+                      },
+                      child: value.isNotificationOpen
+                          ? const Icon(Icons.notifications, size: 32)
+                          : const Icon(Icons.notifications_none_sharp,
+                              size: 32)),
+                ),
+                AppSize.sizeWidth16,
+                Consumer<AppProvider>(
+                  builder: (context, appProvider, child) => GestureDetector(
+                    onTap: () {
+                      appProvider.likedAppbarHome;
+                    },
+                    child: appProvider.isLiked
+                        ? Icon(
+                            Icons.favorite,
+                            size: 32,
+                            color: AppColor.errorColor,
+                          )
+                        : const Icon(Icons.favorite_border, size: 32),
+                  ),
                 ),
               ],
             ),
@@ -118,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             AppSize.sizeHeight10,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
+              padding: AppSize.paddingH35,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -149,11 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Widget slide() {
-            // return
-            SizedBox(
-              height: MediaQuery.of(context).size.width / 4,
-              width: MediaQuery.of(context).size.width * 1,
+          
               // child: CarouselSlider(
               //   items: [
               //     ExactAssetImage("images/01.jpg"),
@@ -164,7 +163,6 @@ class _HomeScreenState extends State<HomeScreen> {
               //     ExactAssetImage('images/06.jpg')
               //   ],
               // ),
-            )
           ],
         ),
       ),

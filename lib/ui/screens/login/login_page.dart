@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/account_setup.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_validators.dart';
+import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';
 import 'package:plant_ecommerce/ui/screens/forgot_password/forgot_screen.dart';
-import 'package:plant_ecommerce/ui/screens/sign_up_screen.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
-import '../../global/snackbar/snackbar.dart';
-import '../../styles/colors/app_colors.dart';
-import '../widgets/global_validators.dart';
-import '../widgets/social_network_row.dart';
+import 'package:plant_ecommerce/ui/screens/onboard/widgets/social_network_row.dart';
+import 'package:plant_ecommerce/ui/screens/sign_up/sign_up_screen.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -66,19 +66,15 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   AppSize.sizeHeight80,
                   Padding(
-                    padding: AppSize.paddHorizontal110,
+                    padding: AppSize.paddingH110,
                     child: Image.asset(GlobalAssets.login_2),
-                    //  Image.asset(
-                    //   'assets/images/login_2.png',
-                    //   fit: BoxFit.fitWidth,
-                    // ),
                   ),
                   AppSize.sizeHeight30,
                   Text(
                     "Login to Your Account",
                     style: CustomTextStyle.standardStyle,
                   ),
-                  const SizedBox(height: 16),
+                  AppSize.sizeHeight16,
                   Column(children: [
                     GlobalInput(
                       enabled: true,
@@ -131,12 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GlobalButton(
                     text: 'Sign in',
-                    clicked: true,
-                    isIcon: false,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
                         {
-                          Get.to(() => const AccountSetup());
+                          Get.to(() => const HomeScreen());
 
                           context.snackbarSuccessMessage;
                         }
@@ -169,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text('Dont have an account?',
                           style: CustomTextStyle.tinyStyleItalic),
-                      const SizedBox(width: 4),
+                      AppSize.sizeWidth4,
                       InkWell(
                         onTap: () {
                           Get.to(() => const SignUp());
@@ -190,9 +184,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  // void onDone() {
-  //   () => context.goNextFocus;
-  //   // GlobalRoutes.to(context, const AccountSetup());
-  // }
 }

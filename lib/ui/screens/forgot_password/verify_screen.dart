@@ -4,25 +4,25 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/home_screen.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
+import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
 
 import '../../../constants/routes/global_routes.dart';
 import '../../../styles/colors/app_colors.dart';
-import 'otp_screen.dart';
+import 'widgets/otp_screen.dart';
 
-class ForgotScreen extends StatefulWidget {
+class VerifyScreen extends StatefulWidget {
   final bool isMail;
-  const ForgotScreen({
+  const VerifyScreen({
     Key? key,
     required this.isMail,
   }) : super(key: key);
 
   @override
-  State<ForgotScreen> createState() => ForgotScreenState();
+  State<VerifyScreen> createState() => VerifyScreenState();
 }
 
-class ForgotScreenState extends State<ForgotScreen> {
+class VerifyScreenState extends State<VerifyScreen> {
   static int numberOfDots = 4;
   late String currentPin = '';
   late int inputPinCount = 0;
@@ -94,11 +94,8 @@ class ForgotScreenState extends State<ForgotScreen> {
             AppSize.sizeHeight50,
             GlobalButton(
               text: "Verify",
-              clicked: true,
-              isIcon: false,
               onTap: () {
                 setState(() {});
-                // print(currentPin);
                 if (currentPin == '4321') {
                   Get.to(() => const HomeScreen());
                 } else {
@@ -116,7 +113,7 @@ class ForgotScreenState extends State<ForgotScreen> {
   Widget get numberpad {
     return Expanded(
       child: Padding(
-        padding: AppSize.pad32x32x10,
+        padding: AppSize.padding32x32x10,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

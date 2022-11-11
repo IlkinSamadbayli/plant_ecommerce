@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/colors/app_colors.dart';
-import '../../styles/styles/text_style.dart';
+import '../../../styles/colors/app_colors.dart';
+import '../../../styles/styles/text_style.dart';
 
 class GenderSelection extends StatelessWidget {
   final String text;

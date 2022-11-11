@@ -1,20 +1,20 @@
-part of 'login_bloc.dart';
+// part of 'login_bloc.dart';
 
-@immutable
-abstract class LoginState {}
+// @immutable
+// abstract class LoginState {}
 
-class LoginInitial extends LoginState {}
+// class LoginInitial extends LoginState {}
 
-class LoginSuccess extends LoginState {
-  final String loginResult;
+// class LoginSuccess extends LoginState {
+//   final String loginResult;
 
-  LoginSuccess({required this.loginResult});
-}
+//   LoginSuccess({required this.loginResult});
+// }
 
-class LoginLoading extends LoginState {}
+// class LoginLoading extends LoginState {}
 
-class LoginFailure extends LoginState {
-  final GlobalFailure? failure;
+// class LoginFailure extends LoginState {
+//   final GlobalFailure? failure;
 
-  LoginFailure({this.failure});
-}
+//   LoginFailure({this.failure});
+// }

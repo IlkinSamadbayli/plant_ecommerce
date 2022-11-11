@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/constants/sizedbox.dart';
 
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
@@ -43,17 +44,13 @@ class GlobalInput extends StatefulWidget {
 class _GlobalInputState extends State<GlobalInput> {
   final formKey = GlobalKey<FormState>();
 
-  bool clicked = true;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32,
-        vertical: 8,
-      ),
+      padding: AppSize.padding8x32,
       child: TextFormField(
-        
         enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         focusNode: widget.textFocus,
@@ -63,7 +60,7 @@ class _GlobalInputState extends State<GlobalInput> {
         onChanged: widget.onChanged,
         validator: widget.validator,
         style: CustomTextStyle.tinyStyleItalic,
-        obscureText: widget.isPassword ? clicked : false,
+        obscureText: widget.isPassword ? isVisible : false,
         decoration: InputDecoration(
           // counterStyle: CustomTextStyle.standardStyle,
           prefixIcon: widget.prefixIcon,
@@ -71,10 +68,10 @@ class _GlobalInputState extends State<GlobalInput> {
               ? GestureDetector(
                   onTap: () {
                     setState(() {
-                      clicked = !clicked;
+                      isVisible = !isVisible;
                     });
                   },
-                  child: clicked
+                  child: isVisible
                       ? Icon(Icons.visibility, color: AppColor.primaryColor)
                       : Icon(Icons.visibility_off,
                           color: AppColor.primaryColor),

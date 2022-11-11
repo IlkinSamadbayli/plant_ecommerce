@@ -43,7 +43,7 @@ class CardWidget extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(5),
+                  padding: AppSize.paddingAll5,
                   child: image,
                   // child: Image.asset(images[1]),
                 ),

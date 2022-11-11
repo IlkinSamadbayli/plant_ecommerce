@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/onboard_screen_2.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
+import 'package:plant_ecommerce/ui/screens/onboard/enterance_screen.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../styles/colors/app_colors.dart';
+import '../../../styles/colors/app_colors.dart';
 
 class OnboardPage extends StatefulWidget {
   const OnboardPage({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class _OnboardPageState extends State<OnboardPage> {
         ],
       ),
       bottomSheet: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: AppSize.paddingH8,
         height: 130,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,8 +69,6 @@ class _OnboardPageState extends State<OnboardPage> {
             AppSize.sizeHeight16,
             GlobalButton(
               text: currentIndex == 2 ? "Get Started" : "Next",
-              isIcon: false,
-              clicked: true,
               onTap: () => currentIndex == 2
                   ? Get.to(() => const EnterancePage())
                   : _pageController.nextPage(

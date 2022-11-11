@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/login_page.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
-import '../../styles/colors/app_colors.dart';
-import '../../styles/global_assets/global_assets.dart';
-import 'sign_up_screen.dart';
+import 'package:plant_ecommerce/ui/screens/login/login_page.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
+import '../../../styles/colors/app_colors.dart';
+import '../../../styles/global_assets/global_assets.dart';
+import '../sign_up/sign_up_screen.dart';
 
 class EnterancePage extends StatelessWidget {
   const EnterancePage({Key? key}) : super(key: key);
@@ -18,13 +18,13 @@ class EnterancePage extends StatelessWidget {
         children: [
           AppSize.sizeHeight60,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 80),
+            padding: AppSize.paddingH80,
             child: Image.asset(GlobalAssets.login_1),
           ),
           Text('Let\'s you in', style: CustomTextStyle.largeBoldStyle),
           AppSize.sizeHeight40,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: AppSize.paddingH40,
             child: Column(
               children: [
                 centerPage(
@@ -37,7 +37,7 @@ class EnterancePage extends StatelessWidget {
                 ),
                 centerPage(
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    padding: AppSize.paddingV4,
                     child: Image.asset('./assets/images/google.png'),
                   ),
                   'Continue with Google',
@@ -57,11 +57,9 @@ class EnterancePage extends StatelessWidget {
           AppSize.sizeHeight20,
           GlobalButton(
             text: 'Sign in with password',
-            clicked: true,
             onTap: () {
               Get.to(() => const LoginPage());
             },
-            isIcon: false,
           ),
           AppSize.sizeHeight20,
           Row(
@@ -93,7 +91,7 @@ class EnterancePage extends StatelessWidget {
 
 Widget centerPage(Widget widget, String text) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
+    padding: AppSize.paddingV10,
     child: InkWell(
       onTap: () {},
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -1,24 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/date_picker_theme.dart';
 import 'package:flutter_holo_date_picker/widget/date_picker_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
 import 'package:plant_ecommerce/ui/screens/forgot_password/lock_screen.dart';
-import 'package:plant_ecommerce/ui/widgets/gender_selection.dart';
-import 'package:plant_ecommerce/ui/widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
+import 'package:plant_ecommerce/ui/screens/sign_up/gender_selection.dart';
 
-import '../../styles/colors/app_colors.dart';
-import '../widgets/global_validators.dart';
+import '../../../styles/colors/app_colors.dart';
+import '../../global_widgets/global_validators.dart';
 
 class AccountSetup extends StatefulWidget {
-  const AccountSetup({Key? key}) : super(key: key);
+  final TextEditingController mailController;
+  const AccountSetup({
+    Key? key,
+    required this.mailController,
+  }) : super(key: key);
 
   @override
   State<AccountSetup> createState() => _AccountSetupState();
@@ -29,7 +35,6 @@ class _AccountSetupState extends State<AccountSetup> {
   PhoneNumber number = PhoneNumber(isoCode: 'NG');
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController mailController;
   late TextEditingController nameController;
   late TextEditingController nickController;
   late TextEditingController dateController;
@@ -68,7 +73,6 @@ class _AccountSetupState extends State<AccountSetup> {
 
   @override
   void initState() {
-    mailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
     nickController = TextEditingController();
@@ -89,7 +93,6 @@ class _AccountSetupState extends State<AccountSetup> {
 
   @override
   void dispose() {
-    mailController.dispose();
     passwordController.dispose();
     nameController.dispose();
     nickController.dispose();
@@ -139,10 +142,7 @@ class _AccountSetupState extends State<AccountSetup> {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 120,
-                        vertical: 20,
-                      ),
+                      padding: AppSize.padding20x120,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
@@ -220,7 +220,7 @@ class _AccountSetupState extends State<AccountSetup> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         GlobalBorderStyle.borderRadius40),
-                                padding: AppSize.paddHorizontal25,
+                                padding: AppSize.paddingH25,
                                 child: DatePickerWidget(
                                     initialDate: DateTime.now(),
                                     onConfirm: (dateTime, selectedIndex) {},
@@ -244,8 +244,6 @@ class _AccountSetupState extends State<AccountSetup> {
                               AppSize.sizeHeight40,
                               GlobalButton(
                                 text: "Select birthday",
-                                isIcon: false,
-                                clicked: true,
                                 onTap: () {
                                   Get.back();
                                 },
@@ -274,7 +272,7 @@ class _AccountSetupState extends State<AccountSetup> {
                 GlobalInput(
                   enabled: true,
                   labelText: "Your email",
-                  controller: mailController,
+                  controller: widget.mailController,
                   isPassword: false,
                   validator: emailValidator,
                   prefixIcon: Icon(Icons.mail, color: AppColor.primaryColor),
@@ -288,10 +286,7 @@ class _AccountSetupState extends State<AccountSetup> {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 8,
-                  ),
+                  padding: AppSize.padding8x32,
                   child: InternationalPhoneNumberInput(
                     onInputChanged: (value) {
                       setState(() {
@@ -342,18 +337,13 @@ class _AccountSetupState extends State<AccountSetup> {
                 AppSize.sizeHeight10,
                 GlobalButton(
                   text: "Continue",
-                  clicked: true,
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      Get.to(() => const LockScreen(
-                          // emailController: mailController,
-                          // phoneController: numberController,
-                          ));
+                      Get.to(() => const LockScreen());
                     } else {
                       context.snackbarErrorMessage;
                     }
                   },
-                  isIcon: false,
                 ),
               ],
             ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/login_page.dart';
-import 'package:plant_ecommerce/ui/widgets/global_onchanged.dart';
-import '../../styles/colors/app_colors.dart';
-import '../../styles/global_assets/global_assets.dart';
-import '../widgets/global_button.dart';
-import '../widgets/global_input.dart';
-import '../widgets/global_validators.dart';
-import '../widgets/social_network_row.dart';
+import 'package:plant_ecommerce/ui/screens/login/login_page.dart';
+import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
+import '../../../styles/colors/app_colors.dart';
+import '../../../styles/global_assets/global_assets.dart';
+import '../../global_widgets/global_button.dart';
+import '../../global_widgets/global_input.dart';
+import '../../global_widgets/global_validators.dart';
+import '../onboard/widgets/social_network_row.dart';
 import 'account_setup.dart';
 
 class SignUp extends StatefulWidget {
@@ -22,10 +23,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  late final TextEditingController mailController;
   bool isChecked = false;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController mailController;
   late TextEditingController passwordController;
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
@@ -60,14 +61,14 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: AppSize.paddingTop100,
                 child: Image.asset(GlobalAssets.signup),
               ),
               Text(
                 "Create Your Account",
                 style: CustomTextStyle.standardStyle,
               ),
-              const SizedBox(height: 24),
+              AppSize.sizeHeight24,
               Column(children: [
                 GlobalInput(
                   enabled: true,
@@ -85,7 +86,7 @@ class _SignUpState extends State<SignUp> {
                   textFocus: emailFocus,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const SizedBox(height: 16),
+                AppSize.sizeHeight16,
                 GlobalInput(
                   enabled: true,
                   labelText: "Your password",
@@ -124,25 +125,23 @@ class _SignUpState extends State<SignUp> {
               ),
               GlobalButton(
                 text: 'Sign up',
-                clicked: true,
-                isIcon: false,
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.snackbarSuccessMessage;
-                    Get.to(() => const AccountSetup());
+                    Get.to(() => AccountSetup(mailController: mailController));
                   } else {
                     context.snackbarErrorMessage;
                   }
                 },
               ),
-              const SizedBox(height: 24),
+              AppSize.sizeHeight24,
               Text(
                 'or continue with',
                 style: CustomTextStyle.tinyStyleGray,
               ),
-              const Padding(
-                padding: EdgeInsets.all(24),
-                child: SocialNetwork(),
+              Padding(
+                padding: AppSize.paddingAll24,
+                child: const SocialNetwork(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

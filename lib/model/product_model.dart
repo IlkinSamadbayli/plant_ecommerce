@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CardModel {
+class ProductModel {
   Image image;
   String text;
   String rated;
   String price;
-  CardModel({
+  ProductModel({
     required this.image,
     required this.text,
     required this.rated,
