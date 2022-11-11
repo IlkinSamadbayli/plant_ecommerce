@@ -34,7 +34,7 @@ class CardWidget extends StatelessWidget {
           elevation: 6,
           semanticContainer: true,
           shadowColor: AppColor.highlightColor,
-          color: AppColor.hintTextColor,
+          color: AppColor.waterColor,
           shape: RoundedRectangleBorder(
               borderRadius: GlobalBorderStyle.borderRadius10),
           child: Container(
@@ -45,12 +45,10 @@ class CardWidget extends StatelessWidget {
                 Padding(
                   padding: AppSize.paddingAll5,
                   child: image,
-                  // child: Image.asset(images[1]),
                 ),
                 AppSize.sizeHeight8,
                 Text(
                   "Rubber fig Plant",
-                  // name.toString(),
                   style: CustomTextStyle.tinyStyleBold,
                 ),
                 Row(

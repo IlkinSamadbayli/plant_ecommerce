@@ -155,11 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
           
               // child: CarouselSlider(
               //   items: [
-              //     ExactAssetImage("images/01.jpg"),
-              //     ExactAssetImage("images/02.jpg"),
-              //     ExactAssetImage('images/03.jpg'),
-              //     ExactAssetImage("images/04.jpg"),
-              //     ExactAssetImage("images/05.jpg"),
               //     ExactAssetImage('images/06.jpg')
               //   ],
               // ),

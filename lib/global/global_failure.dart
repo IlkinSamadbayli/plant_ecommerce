@@ -1,5 +1,5 @@
-class GlobalFailure {
-  late final String errorMessage;
+// class GlobalFailure {
+//   late final String errorMessage;
 
-  GlobalFailure({this.errorMessage = "error occured"});
-}
+//   GlobalFailure({this.errorMessage = "error occured"});
+// }
