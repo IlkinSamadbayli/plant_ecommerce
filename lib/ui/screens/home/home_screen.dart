@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/data/product_data.dart';
 import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 
-import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/ui/screens/home/components/card_widget.dart';
 import 'package:provider/provider.dart';
-
-import 'components/card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ProductData data = ProductData();
   late FocusNode filterFocus;
   late TextEditingController filterController;
   @override
@@ -136,29 +137,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 300,
-              child: Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => AppSize.sizeWidth20,
-                  itemCount: 4,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => CardWidget(
-                    image: Image.asset(GlobalAssets.card_1),
-                    price: "12",
-                    rated: "4.6",
-                    text: "Rubber fig Plant",
-                  ),
-                ),
-              ),
-            ),
-          
-              // child: CarouselSlider(
-              //   items: [
-              //     ExactAssetImage('images/06.jpg')
-              //   ],
-              // ),
+            cardList,
+            cardList,
+            // child: CarouselSlider(
+            //   items: [
+            //     ExactAssetImage('images/06.jpg')
+            //   ],
+            // ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget get cardList {
+    return SizedBox(
+      height: 240,
+      child: Expanded(
+        child: ListView.separated(
+          separatorBuilder: (context, index) => AppSize.sizeWidth10,
+          itemCount: 3,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) =>
+              CardWidget(item: ProductData.items[index]),
         ),
       ),
     );

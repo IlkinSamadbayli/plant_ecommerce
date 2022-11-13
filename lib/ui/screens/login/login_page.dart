@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
-import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/global_widgets/global_validators.dart';
 import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';

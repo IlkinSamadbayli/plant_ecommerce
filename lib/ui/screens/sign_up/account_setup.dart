@@ -7,7 +7,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
-import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';

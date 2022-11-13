@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 
 import '../../../../styles/colors/app_colors.dart';
-import '../../../../styles/global_assets/global_assets.dart';
+import '../../../../global/global_assets/global_assets.dart';
 
 class SocialNetwork extends StatelessWidget {
   const SocialNetwork({super.key});

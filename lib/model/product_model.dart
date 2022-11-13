@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class ProductModel {
   Image image;
-  String text;
+  String sold;
   String rated;
-  String price;
+  int price;
   ProductModel({
     required this.image,
-    required this.text,
+    required this.sold,
     required this.rated,
     required this.price,
   });

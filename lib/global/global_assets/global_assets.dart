@@ -16,4 +16,7 @@ class GlobalAssets {
   static String forgot = '$regressImage/forgot.jpg';
   static String threeDots = '$regressImage/3dots.png';
   static String verify = '$regressImage/verify.png';
+  static String carusel_1 = '$regressImage/carusel_1.png';
+  static String carusel_2 = '$regressImage/carusel_2.png';
+  static String carusel_3 = '$regressImage/carusel_3.png';
 }

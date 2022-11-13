@@ -21,7 +21,16 @@ class CustomTextStyle {
     fontSize: 24,
     fontFamily: "Josefin Sans",
   );
-  static TextStyle littleStyleGreen = TextStyle(
+  static TextStyle littleStylelineThroughItalic = TextStyle(
+    decoration: TextDecoration.lineThrough,
+    fontStyle: FontStyle.italic,
+    fontSize: 24,
+    color: AppColor.errorColor,
+    fontFamily: "Josefin Sans",
+  );
+  static TextStyle littleStyleGreenItalic = TextStyle(
+    fontStyle: FontStyle.italic,
+
     fontSize: 24,
     fontFamily: "Josefin Sans",
     color: AppColor.mainColor,
@@ -71,7 +80,7 @@ class CustomTextStyle {
     fontSize: 14,
     fontFamily: "Josefin Sans",
   );
-  static TextStyle moreTinyStyleGreen =  TextStyle(
+  static TextStyle moreTinyStyleGreen = TextStyle(
     fontSize: 14,
     fontFamily: "Josefin Sans",
     color: AppColor.mainColor,
