@@ -5,7 +5,7 @@ import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/login/login_page.dart';
 import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
 import '../../../styles/colors/app_colors.dart';
-import '../../../styles/global_assets/global_assets.dart';
+import '../../../global/global_assets/global_assets.dart';
 import '../sign_up/sign_up_screen.dart';
 
 class EnterancePage extends StatelessWidget {

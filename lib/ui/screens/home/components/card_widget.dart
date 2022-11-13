@@ -1,28 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/model/product_model.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
-class CardWidget extends StatelessWidget {
-  // final List<String> images = [
-  //   GlobalAssets.card_1,
-  //   GlobalAssets.card_2,
-  //   GlobalAssets.card_3,
-  // ];
-  final Image image;
-  final String text;
-  final String rated;
-  final String price;
-  const CardWidget({
-    Key? key,
-    required this.image,
-    required this.text,
-    required this.rated,
-    required this.price,
-  }) : super(key: key);
+// ignore: must_be_immutable
+class CardWidget extends StatefulWidget {
+  ProductModel item;
+  CardWidget({Key? key, required this.item}) : super(key: key);
+  @override
+  State<CardWidget> createState() => _CardWidgetState();
+}
 
+class _CardWidgetState extends State<CardWidget> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     // var name = names.map((name) => name).toList();
@@ -44,7 +38,12 @@ class CardWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: AppSize.paddingAll5,
-                  child: image,
+                  child: Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 4 / 3,
+                      child: widget.item.image,
+                    ),
+                  ),
                 ),
                 AppSize.sizeHeight8,
                 Text(
@@ -61,7 +60,7 @@ class CardWidget extends StatelessWidget {
                     ),
                     AppSize.sizeWidth4,
                     Text(
-                      rated,
+                      widget.item.rated,
                       style: CustomTextStyle.tinyStyleGray,
                     ),
                     AppSize.sizeWidth8,
@@ -74,19 +73,30 @@ class CardWidget extends StatelessWidget {
                         border: Border.all(width: 1, color: AppColor.mainColor),
                       ),
                       child: Text(
-                        "266 sold",
+                        widget.item.sold,
                         style: CustomTextStyle.moreTinyStyleGreen,
                       ),
                     )
                   ],
                 ),
                 AppSize.sizeHeight4,
+                Text(
+                  "Amount %20",
+                  style: CustomTextStyle.littleStyle,
+                ),
+                AppSize.sizeHeight4,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppSize.sizeWidth10,
                     Text(
-                      " \$$price",
-                      style: CustomTextStyle.littleStyleGreen,
+                      " \$${widget.item.price}",
+                      style: CustomTextStyle.littleStylelineThroughItalic,
+                      textAlign: TextAlign.end,
+                    ),
+                    Text(
+                      " \$${(widget.item.price * 0.8).toStringAsFixed(1)}",
+                      style: CustomTextStyle.littleStyleGreenItalic,
                       textAlign: TextAlign.end,
                     ),
                   ],
@@ -95,12 +105,18 @@ class CardWidget extends StatelessWidget {
             ),
           ),
         ),
-        const Positioned(
+        Positioned(
           right: 16,
-          top: 16,
-          child: Icon(
-            Icons.favorite,
-            color: Colors.red,
+          bottom: 16,
+          child: GestureDetector(
+            onTap: () => setState(() {
+              isFavorite = !isFavorite;
+            }),
+            child: Icon(
+              Icons.favorite,
+              color:
+                  isFavorite ? AppColor.errorColor : AppColor.versionColorWhite,
+            ),
           ),
         ),
       ],

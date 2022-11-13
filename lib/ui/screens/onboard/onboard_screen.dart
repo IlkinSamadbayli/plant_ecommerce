@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
-import 'package:plant_ecommerce/styles/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/ui/screens/onboard/enterance_screen.dart';
 import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
