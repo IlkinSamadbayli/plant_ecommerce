@@ -10,13 +10,19 @@ import 'package:plant_ecommerce/styles/styles/text_style.dart';
 // ignore: must_be_immutable
 class CardWidget extends StatefulWidget {
   ProductModel item;
-  CardWidget({Key? key, required this.item}) : super(key: key);
+  final List<String> favoriteCard;
+  CardWidget({
+    Key? key,
+    required this.item,
+    required this.favoriteCard,
+  }) : super(key: key);
   @override
   State<CardWidget> createState() => _CardWidgetState();
 }
 
 class _CardWidgetState extends State<CardWidget> {
   bool isFavorite = false;
+  String likedCard = "Liked Card";
   @override
   Widget build(BuildContext context) {
     // var name = names.map((name) => name).toList();
@@ -47,7 +53,7 @@ class _CardWidgetState extends State<CardWidget> {
                 ),
                 AppSize.sizeHeight8,
                 Text(
-                  "Rubber fig Plant",
+                  widget.item.title,
                   style: CustomTextStyle.tinyStyleBold,
                 ),
                 Row(
@@ -73,7 +79,7 @@ class _CardWidgetState extends State<CardWidget> {
                         border: Border.all(width: 1, color: AppColor.mainColor),
                       ),
                       child: Text(
-                        widget.item.sold,
+                        "${widget.item.sold} sold",
                         style: CustomTextStyle.moreTinyStyleGreen,
                       ),
                     )
@@ -106,16 +112,17 @@ class _CardWidgetState extends State<CardWidget> {
           ),
         ),
         Positioned(
-          right: 16,
-          bottom: 16,
-          child: GestureDetector(
-            onTap: () => setState(() {
+          right: 0,
+          bottom: 0,
+          child: IconButton(
+            onPressed: () => setState(() {
               isFavorite = !isFavorite;
+              // widget.favoriteCard.add(likedCard).toList();
+              // print("sd");
             }),
-            child: Icon(
+            icon: Icon(
               Icons.favorite,
-              color:
-                  isFavorite ? AppColor.errorColor : AppColor.versionColorWhite,
+              color: isFavorite ? AppColor.errorColor : AppColor.waterColor,
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/data/product_data.dart';
@@ -6,14 +7,12 @@ import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/screens/home/components/card_widget.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/presentation/screens/home/components/card_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,11 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Container(
-          margin: const EdgeInsets.only(
-            left: 8,
-            top: 6,
-            bottom: 6,
-          ),
+          margin: AppSize.padding8x6x6,
           child: Image.asset(GlobalAssets.avatar),
         ),
         title: Row(
@@ -52,11 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Good Morning",
                       style: CustomTextStyle.moreTinyStyleGray,
                     ),
-                    const SizedBox(width: 8),
-                    const Icon(
+                    AppSize.sizeWidth8,
+                    Icon(
                       Icons.back_hand,
                       size: 20,
-                      color: Colors.yellow,
+                      color: AppColor.lightGreenColor,
+                      //  Colors.yellow,
                     )
                   ],
                 ),
@@ -70,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Container(
-            margin: const EdgeInsets.only(right: 24),
+            margin: AppSize.paddingRight24,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -90,13 +86,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       appProvider.likedAppbarHome;
                     },
-                    child: appProvider.isLiked
-                        ? Icon(
-                            Icons.favorite,
-                            size: 32,
-                            color: AppColor.errorColor,
-                          )
-                        : const Icon(Icons.favorite_border, size: 32),
+                    child: Stack(
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          size: 32,
+                          color: appProvider.isLiked
+                              ? AppColor.errorColor
+                              : AppColor.versionColorWhite,
+                        ),
+                        Positioned(
+                          right: -1,
+                          top: 0,
+                          child: Container(
+                            width: 13,
+                            height: 13,
+                            decoration: BoxDecoration(
+                              color: AppColor.errorColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Text(
+                              "1",
+                              style: TextStyle(fontSize: 10),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -107,6 +124,35 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            AppSize.sizeHeight10,
+            Column(
+              children: [
+                CarouselSlider.builder(
+                  itemCount: 3,
+                  itemBuilder: (context, i, realIndex) => Stack(
+                    children: [
+                      Image.asset("./assets/images/carusel_${i + 1}.png"),
+                      Positioned(
+                        bottom: 16,
+                        left: 70,
+                        child: Text(
+                          "Amount %20",
+                          style: CustomTextStyle.standardStyleBold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 4 / 3,
+                  ),
+                ),
+              ],
+            ),
+            // CarouselSlider(
+
+            //   items: [ExactAssetImage('images/06.jpg')],
+            // ),
             AppSize.sizeHeight10,
             GlobalInput(
               prefixIcon: const Icon(Icons.search),
@@ -137,29 +183,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            cardList,
-            cardList,
-            // child: CarouselSlider(
-            //   items: [
-            //     ExactAssetImage('images/06.jpg')
-            //   ],
-            // ),
+            cardList(-1),
+            AppSize.sizeHeight10,
+            cardList(2),
+            AppSize.sizeHeight10,
+            cardList(5),
+            AppSize.sizeHeight10,
           ],
         ),
       ),
     );
   }
 
-  Widget get cardList {
-    return SizedBox(
-      height: 240,
-      child: Expanded(
-        child: ListView.separated(
-          separatorBuilder: (context, index) => AppSize.sizeWidth10,
-          itemCount: 3,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) =>
-              CardWidget(item: ProductData.items[index]),
+  Widget cardList(index) {
+    return Padding(
+      padding: AppSize.paddingH15,
+      child: SizedBox(
+        height: 240,
+        child: Expanded(
+          child: ListView.separated(
+            // padding: AppSize.paddingH15,
+            separatorBuilder: (context, _) => AppSize.sizeWidth10,
+            itemCount: 3,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, _) {
+              index++;
+              return CardWidget(
+                item: ProductData.items[index],
+                favoriteCard: const [""],
+              );
+            },
+          ),
         ),
       ),
     );

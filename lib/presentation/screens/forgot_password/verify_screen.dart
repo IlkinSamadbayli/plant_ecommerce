@@ -4,21 +4,25 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/screens/home/home_screen.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
 
 import '../../../constants/routes/global_routes.dart';
 import '../../../styles/colors/app_colors.dart';
 import 'widgets/otp_screen.dart';
 
-class LockScreen extends StatefulWidget {
-  const LockScreen({Key? key}) : super(key: key);
+class VerifyScreen extends StatefulWidget {
+  final bool isMail;
+  const VerifyScreen({
+    Key? key,
+    required this.isMail,
+  }) : super(key: key);
 
   @override
-  State<LockScreen> createState() => LockScreenState();
+  State<VerifyScreen> createState() => VerifyScreenState();
 }
 
-class LockScreenState extends State<LockScreen> {
+class VerifyScreenState extends State<VerifyScreen> {
   static int numberOfDots = 4;
   late String currentPin = '';
   late int inputPinCount = 0;
@@ -66,8 +70,8 @@ class LockScreenState extends State<LockScreen> {
                   ),
                   AppSize.sizeWidth10,
                   Text(
-                    'Create New PIN',
-                    style: CustomTextStyle.littleStyle,
+                    'Forgot Password',
+                    style: CustomTextStyle.standardStyle,
                   ),
                 ],
               ),
@@ -75,7 +79,9 @@ class LockScreenState extends State<LockScreen> {
             Padding(
               padding: AppSize.paddingAll16,
               child: Text(
-                "Add a PIN number to make your account more secure.",
+                widget.isMail
+                    ? "Code has been send to samadbayli.ilkin@gmail.com"
+                    : "Code has been send to +994 70 742 24 21",
                 style: CustomTextStyle.tinyStyleItalic,
                 textAlign: TextAlign.center,
               ),
@@ -84,12 +90,13 @@ class LockScreenState extends State<LockScreen> {
               padding: AppSize.padding50x80,
               child: DotsWidget(count: inputPinCount, dots: numberOfDots),
             ),
-            AppSize.sizeHeight130,
+            timer(),
+            AppSize.sizeHeight50,
             GlobalButton(
-              text: "Continue",
+              text: "Verify",
               onTap: () {
                 setState(() {});
-                if (currentPin == '1234') {
+                if (currentPin == '4321') {
                   Get.to(() => const HomeScreen());
                 } else {
                   context.snackbarErrorMessage;
@@ -160,4 +167,28 @@ class LockScreenState extends State<LockScreen> {
       ),
     );
   }
+}
+
+Widget timer() {
+  return Padding(
+    padding: const EdgeInsets.all(40),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Resend code in",
+          style: CustomTextStyle.tinyStyle,
+        ),
+        TweenAnimationBuilder(
+          tween: Tween<double>(begin: 30, end: 0),
+          duration: const Duration(seconds: 30),
+          builder: (_, value, child) => Text(
+            "00: ${value.toDouble().toStringAsFixed(0)}",
+            style: CustomTextStyle.tinyStyleGray,
+          ),
+          onEnd: () {},
+        )
+      ],
+    ),
+  );
 }

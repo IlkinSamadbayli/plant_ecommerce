@@ -5,14 +5,14 @@ import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_validators.dart';
-import 'package:plant_ecommerce/ui/screens/home/home_screen.dart';
-import 'package:plant_ecommerce/ui/screens/forgot_password/forgot_screen.dart';
-import 'package:plant_ecommerce/ui/screens/onboard/widgets/social_network_row.dart';
-import 'package:plant_ecommerce/ui/screens/sign_up/sign_up_screen.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_validators.dart';
+import 'package:plant_ecommerce/presentation/screens/home/home_screen.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/forgot_screen.dart';
+import 'package:plant_ecommerce/presentation/screens/onboard/widgets/social_network_row.dart';
+import 'package:plant_ecommerce/presentation/screens/sign_up/sign_up_screen.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

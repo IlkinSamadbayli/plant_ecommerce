@@ -10,11 +10,11 @@ import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
-import 'package:plant_ecommerce/ui/screens/forgot_password/lock_screen.dart';
-import 'package:plant_ecommerce/ui/screens/sign_up/gender_selection.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/lock_screen.dart';
+import 'package:plant_ecommerce/presentation/screens/sign_up/gender_selection.dart';
 
 import '../../../styles/colors/app_colors.dart';
 import '../../global_widgets/global_validators.dart';
