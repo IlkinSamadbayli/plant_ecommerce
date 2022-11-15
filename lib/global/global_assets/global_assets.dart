@@ -14,11 +14,11 @@ class GlobalAssets {
   static String card_2 = '$regressImage/card_2.png';
   static String card_3 = '$regressImage/card_3.png';
   static String card_4 = '$regressImage/card_4.png';
-  static String card_5 = '$regressImage/card_5spider.jpeg';
-  static String card_6 = '$regressImage/card_6dumbcane.jpg';
-  static String card_7 = '$regressImage/card_7orchid.jpg';
-  static String card_8 = '$regressImage/card_8bromeliad.jpg';
-  static String card_9 = '$regressImage/card_9luckybamboo.png';
+  static String card_5 = '$regressImage/card_5.jpeg';
+  static String card_6 = '$regressImage/card_6.jpg';
+  static String card_7 = '$regressImage/card_7.jpg';
+  static String card_8 = '$regressImage/card_8.jpg';
+  static String card_9 = '$regressImage/card_9.png';
   static String forgot = '$regressImage/forgot.jpg';
   static String threeDots = '$regressImage/3dots.png';
   static String verify = '$regressImage/verify.png';

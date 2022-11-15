@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/data/login_data.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
@@ -56,7 +57,11 @@ class _LoginPageState extends State<LoginPage> {
       key: scaffoldKey,
       body: GestureDetector(
         onTap: () {
-          emailFocus.unfocus();
+          if (emailFocus.hasFocus) {
+            emailFocus.unfocus();
+          } else if (passwordFocus.hasFocus) {
+            passwordFocus.unfocus();
+          }
         },
         child: Form(
           key: formKey,
@@ -129,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                     text: 'Sign in',
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        {
+                        var token = await LoginData.loginData();
+                        if (token is String) {
                           Get.to(() => const HomeScreen());
 
                           context.snackbarSuccessMessage;

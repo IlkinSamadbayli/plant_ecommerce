@@ -1,18 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:plant_ecommerce/constants/sizedbox.dart';
-import 'package:plant_ecommerce/data/product_data.dart';
-import 'package:plant_ecommerce/providers/provider.dart';
-import 'package:plant_ecommerce/styles/colors/app_colors.dart';
-
-import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
-import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/presentation/screens/home/components/card_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/data/product_data.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/providers/provider.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
+
+import 'components/card_widget.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  // int index;
+  const HomeScreen({
+    Key? key,
+    // required this.index,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -66,9 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Container(
-            margin: AppSize.paddingRight24,
+            width: 90,
+            margin: AppSize.paddingRight12,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Consumer<AppProvider>(
                   builder: (context, value, child) => GestureDetector(
@@ -98,17 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         Positioned(
                           right: -1,
                           top: 0,
-                          child: Container(
-                            width: 13,
-                            height: 13,
-                            decoration: BoxDecoration(
-                              color: AppColor.errorColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Text(
-                              "1",
-                              style: TextStyle(fontSize: 10),
-                              textAlign: TextAlign.center,
+                          child: ClipOval(
+                            child: Container(
+                              width: 14,
+                              height: 14,
+                              decoration: BoxDecoration(
+                                color: AppColor.errorColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Text(
+                                "21",
+                                style: TextStyle(fontSize: 10),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         )
@@ -208,9 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, _) {
               index++;
+              // return const SizedBox();
               return CardWidget(
                 item: ProductData.items[index],
-                favoriteCard: const [""],
               );
             },
           ),

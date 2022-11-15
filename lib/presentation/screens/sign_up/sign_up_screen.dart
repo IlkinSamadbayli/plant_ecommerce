@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
+import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_validators.dart';
+import 'package:plant_ecommerce/presentation/screens/onboard/widgets/social_network_row.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 import 'package:plant_ecommerce/presentation/screens/login/login_page.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
-import '../../../styles/colors/app_colors.dart';
-import '../../../global/global_assets/global_assets.dart';
-import '../../global_widgets/global_button.dart';
-import '../../global_widgets/global_input.dart';
-import '../../global_widgets/global_validators.dart';
-import '../onboard/widgets/social_network_row.dart';
 import 'account_setup.dart';
 
 class SignUp extends StatefulWidget {

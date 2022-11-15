@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:plant_ecommerce/presentation/screens/login/login_page.dart';
 import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/themes/app_themes.dart';
-import 'package:plant_ecommerce/presentation/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Plant-Ecommerce',
       theme: appTheme,
-      home: const HomeScreen(),
+      home: const LoginPage(),
     );
   }
 }

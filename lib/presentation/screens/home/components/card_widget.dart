@@ -10,11 +10,12 @@ import 'package:plant_ecommerce/styles/styles/text_style.dart';
 // ignore: must_be_immutable
 class CardWidget extends StatefulWidget {
   ProductModel item;
-  final List<String> favoriteCard;
+  // final List<String> favoriteCard;
+  // late int likedCard = 0;
   CardWidget({
     Key? key,
     required this.item,
-    required this.favoriteCard,
+    // required this.favoriteCard,
   }) : super(key: key);
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -22,7 +23,6 @@ class CardWidget extends StatefulWidget {
 
 class _CardWidgetState extends State<CardWidget> {
   bool isFavorite = false;
-  String likedCard = "Liked Card";
   @override
   Widget build(BuildContext context) {
     // var name = names.map((name) => name).toList();
@@ -117,8 +117,7 @@ class _CardWidgetState extends State<CardWidget> {
           child: IconButton(
             onPressed: () => setState(() {
               isFavorite = !isFavorite;
-              // widget.favoriteCard.add(likedCard).toList();
-              // print("sd");
+              // widget.likedCard + 1;
             }),
             icon: Icon(
               Icons.favorite,
