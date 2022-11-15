@@ -6,9 +6,9 @@ import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/screens/forgot_password/verify_screen.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/screens/forgot_password/widgets/verify_tipe_widget.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/verify_screen.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/widgets/verify_tipe_widget.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);

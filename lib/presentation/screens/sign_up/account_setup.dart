@@ -4,20 +4,18 @@ import 'package:flutter_holo_date_picker/date_picker_theme.dart';
 import 'package:flutter_holo_date_picker/widget/date_picker_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_validators.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_button.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/ui/global_widgets/global_onchanged.dart';
-import 'package:plant_ecommerce/ui/screens/forgot_password/lock_screen.dart';
-import 'package:plant_ecommerce/ui/screens/sign_up/gender_selection.dart';
-
-import '../../../styles/colors/app_colors.dart';
-import '../../global_widgets/global_validators.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/lock_screen.dart';
+import 'package:plant_ecommerce/presentation/screens/sign_up/gender_selection.dart';
 
 class AccountSetup extends StatefulWidget {
   final TextEditingController mailController;

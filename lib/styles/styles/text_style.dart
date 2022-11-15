@@ -17,6 +17,12 @@ class CustomTextStyle {
     fontFamily: "Josefin Sans",
     color: AppColor.numberColor,
   );
+  static TextStyle standardStyleBold = TextStyle(
+    fontSize: 32,
+    fontFamily: "Josefin Sans",
+    color: AppColor.primaryColor,
+    fontWeight: FontWeight.bold
+  );
   static TextStyle littleStyle = const TextStyle(
     fontSize: 24,
     fontFamily: "Josefin Sans",
