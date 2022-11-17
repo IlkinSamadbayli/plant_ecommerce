@@ -14,6 +14,7 @@ import 'package:plant_ecommerce/presentation/screens/sign_up/sign_up_screen.dart
 import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -86,7 +87,13 @@ class _LoginPageState extends State<LoginPage> {
                       labelText: "Your email",
                       controller: mailController,
                       isPassword: false,
-                      validator: emailValidator,
+                      validator: (mail) {
+                        if (mail == '') {
+                          return "Please fill your email";
+                        } else {
+                          return null;
+                        }
+                      },
                       prefixIcon: const Icon(Icons.mail),
                       isCorrect: isTrueMail,
                       onChanged: (mail) {
@@ -134,10 +141,15 @@ class _LoginPageState extends State<LoginPage> {
                     text: 'Sign in',
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        var token = await LoginData.loginData();
+                        var token = await LoginData.loginData(
+                            mailController.text, passwordController.text);
                         if (token is String) {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.setString(
+                              "email", mailController.text);
                           Get.to(() => const HomeScreen());
-
+                          // "eve.holt@reqres.in"
                           context.snackbarSuccessMessage;
                         }
                       } else {
