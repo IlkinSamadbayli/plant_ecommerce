@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:plant_ecommerce/presentation/screens/login/login_page.dart';
+import 'package:plant_ecommerce/presentation/screens/onboard/onboard_screen.dart';
 import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/themes/app_themes.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+String? email;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await getPreference();
   runApp(ChangeNotifierProvider(
       create: (context) => AppProvider(), child: const MyApp()));
+}
+
+Future<void> getPreference() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  email = sharedPreferences.getString("email");
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Plant-Ecommerce',
       theme: appTheme,
-      home: const LoginPage(),
+      home: const OnboardPage(),
+      //  email==null||email==''? const LoginPage(): const HomeScreen(),
     );
   }
 }
