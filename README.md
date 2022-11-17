@@ -1,16 +1,8 @@
 # plant_ecommerce
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Onboard Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/onboard_screen.jpg)
+![Enterence Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/enterance_screen.jpg)
+![Forgot Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/forgot_screen.jpg)
+![Verify Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/verify_screen.jpg)
+![SignUp Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/sign_up_screen.jpg)
+![Account Setup](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/account_setup.jpg)
+![Home Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/home_screen.jpg)
