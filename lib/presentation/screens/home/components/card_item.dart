@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/model/product_model.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
@@ -8,20 +6,20 @@ import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
 // ignore: must_be_immutable
-class CardWidget extends StatefulWidget {
+class CardItem extends StatefulWidget {
   ProductModel item;
   // final List<String> favoriteCard;
   // late int likedCard = 0;
-  CardWidget({
+  CardItem({
     Key? key,
     required this.item,
     // required this.favoriteCard,
   }) : super(key: key);
   @override
-  State<CardWidget> createState() => _CardWidgetState();
+  State<CardItem> createState() => _CardItemState();
 }
 
-class _CardWidgetState extends State<CardWidget> {
+class _CardItemState extends State<CardItem> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {

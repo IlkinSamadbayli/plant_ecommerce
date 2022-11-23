@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:plant_ecommerce/presentation/screens/home/components/cards_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'package:plant_ecommerce/constants/sizedbox.dart';
@@ -10,8 +11,6 @@ import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
 import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-
-import 'components/card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   // int index;
@@ -94,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       appProvider.likedAppbarHome;
                     },
                     child: Stack(
+                      clipBehavior: Clip.none,
                       children: [
                         Icon(
                           Icons.favorite,
@@ -103,8 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               : AppColor.versionColorWhite,
                         ),
                         Positioned(
-                          right: -1,
-                          top: 0,
+                          right: -3,
+                          top: -2,
                           child: ClipOval(
                             child: Container(
                               width: 14,
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: const Text(
                                 "21",
-                                style: TextStyle(fontSize: 10),
+                                style: TextStyle(fontSize: 12),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -192,37 +192,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            cardList(-1),
+            CardsWidget(index: -1),
             AppSize.sizeHeight10,
-            cardList(2),
+            CardsWidget(index: 2),
             AppSize.sizeHeight10,
-            cardList(5),
+            CardsWidget(index: 5),
             AppSize.sizeHeight10,
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget cardList(index) {
-    return Padding(
-      padding: AppSize.paddingH15,
-      child: SizedBox(
-        height: 240,
-        child: Expanded(
-          child: ListView.separated(
-            // padding: AppSize.paddingH15,
-            separatorBuilder: (context, _) => AppSize.sizeWidth10,
-            itemCount: 3,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, _) {
-              index++;
-              // return const SizedBox();
-              return CardWidget(
-                item: ProductData.items[index],
-              );
-            },
-          ),
         ),
       ),
     );

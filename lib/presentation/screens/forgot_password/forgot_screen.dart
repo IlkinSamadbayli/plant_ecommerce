@@ -23,71 +23,73 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   bool isSelectMail = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: AppSize.paddingAll24,
-              child: Text(
-                'Forgot Password',
-                style: CustomTextStyle.standardStyle,
+    return Expanded(
+      child: Scaffold(
+        key: scaffoldKey,
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: AppSize.paddingAll24,
+                child: Text(
+                  'Forgot Password',
+                  style: CustomTextStyle.standardStyle,
+                ),
               ),
-            ),
-            Image.asset(
-              GlobalAssets.forgot,
-              width: 500,
-              height: 350,
-            ),
-            Container(
-              padding: AppSize.paddingH20,
-              child: Text(
-                "Select which contact details should we use to reset your password",
-                style: CustomTextStyle.tinyStyleGray,
+              Image.asset(
+                GlobalAssets.forgot,
+                width: 500,
+                height: 350,
               ),
-            ),
-            AppSize.sizeHeight16,
-            VerifyWidget(
-                isSelected: isSelectNumber,
-                ontap: () {
-                  setState(() {
-                    isSelectNumber = true;
-                    isSelectMail = false;
-                  });
-                },
-                image: Image.asset(GlobalAssets.threeDots, width: 50),
-                isMail: false),
-            VerifyWidget(
-                isSelected: isSelectMail,
-                ontap: () {
-                  setState(() {
-                    isSelectMail = true;
-                    isSelectNumber = false;
-                  });
-                },
-                image: Image.asset(GlobalAssets.verify, width: 50),
-                isMail: true),
-            AppSize.sizeHeight20,
-            GlobalButton(
-              text: 'Continue',
-              onTap: () {
-                if (isSelectMail == false && isSelectNumber == false) {
-                  context.snackBarMessage(
-                    color: AppColor.errorColor,
-                    text: "You should select via mail or number",
-                  );
-                } else {
-                  if (isSelectNumber == true) {
-                    Get.to(() => const VerifyScreen(isMail: false));
+              Container(
+                padding: AppSize.paddingH20,
+                child: Text(
+                  "Select which contact details should we use to reset your password",
+                  style: CustomTextStyle.tinyStyleGray,
+                ),
+              ),
+              AppSize.sizeHeight16,
+              VerifyWidget(
+                  isSelected: isSelectNumber,
+                  ontap: () {
+                    setState(() {
+                      isSelectNumber = true;
+                      isSelectMail = false;
+                    });
+                  },
+                  image: Image.asset(GlobalAssets.threeDots, width: 50),
+                  isMail: false),
+              VerifyWidget(
+                  isSelected: isSelectMail,
+                  ontap: () {
+                    setState(() {
+                      isSelectMail = true;
+                      isSelectNumber = false;
+                    });
+                  },
+                  image: Image.asset(GlobalAssets.verify, width: 50),
+                  isMail: true),
+              AppSize.sizeHeight20,
+              GlobalButton(
+                text: 'Continue',
+                onTap: () {
+                  if (isSelectMail == false && isSelectNumber == false) {
+                    context.snackBarMessage(
+                      color: AppColor.errorColor,
+                      text: "You should select via mail or number",
+                    );
                   } else {
-                    Get.to(() => const VerifyScreen(isMail: true));
+                    if (isSelectNumber == true) {
+                      Get.to(() => const VerifyScreen(isMail: false));
+                    } else {
+                      Get.to(() => const VerifyScreen(isMail: true));
+                    }
                   }
-                }
-              },
-            )
-          ],
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

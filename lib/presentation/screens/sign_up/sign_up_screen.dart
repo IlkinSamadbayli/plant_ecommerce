@@ -23,7 +23,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  late final TextEditingController mailController;
+  late final TextEditingController emailController;
   bool isChecked = false;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void initState() {
-    mailController = TextEditingController();
+    emailController = TextEditingController();
     passwordController = TextEditingController();
     emailFocus = FocusNode();
     passwordFocus = FocusNode();
@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void dispose() {
-    mailController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     emailFocus.dispose();
     passwordFocus.dispose();
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                 GlobalInput(
                   enabled: true,
                   labelText: "Your email",
-                  controller: mailController,
+                  controller: emailController,
                   isPassword: false,
                   validator: emailValidator,
                   prefixIcon: const Icon(Icons.mail),
@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.snackbarSuccessMessage;
-                    Get.to(() => AccountSetup(mailController: mailController));
+                    Get.to(() => const AccountSetup());
                   } else {
                     context.snackbarErrorMessage;
                   }
