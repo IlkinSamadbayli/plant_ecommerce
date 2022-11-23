@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppSize {
+  static double deviceHeight(context) => MediaQuery.of(context).size.height;
+  static double deviceWidth(context) => MediaQuery.of(context).size.width;
+
   static SizedBox get sizeHeight4 => const SizedBox(height: 4);
   static SizedBox get sizeHeight8 => const SizedBox(height: 8);
   static SizedBox get sizeHeight10 => const SizedBox(height: 10);
@@ -51,7 +54,7 @@ class AppSize {
 
   static EdgeInsetsGeometry get paddingRight12 =>
       const EdgeInsets.only(right: 12);
- 
+
   static EdgeInsetsGeometry get paddingH25 =>
       const EdgeInsets.symmetric(horizontal: 25);
 
@@ -73,11 +76,17 @@ class AppSize {
   static EdgeInsetsGeometry get padding20x10 =>
       const EdgeInsets.symmetric(vertical: 20, horizontal: 10);
 
+  static EdgeInsetsGeometry get padding30x30 =>
+      const EdgeInsets.symmetric(vertical: 30, horizontal: 30);
+
   static EdgeInsetsGeometry get padding8x32 =>
       const EdgeInsets.symmetric(vertical: 8, horizontal: 32);
 
   static EdgeInsetsGeometry get padding10x40 =>
       const EdgeInsets.symmetric(vertical: 10, horizontal: 40);
+
+  static EdgeInsetsGeometry get padding60x60 =>
+      const EdgeInsets.symmetric(vertical: 60, horizontal: 60);
 
   static EdgeInsetsGeometry get padding50x80 =>
       const EdgeInsets.symmetric(vertical: 50, horizontal: 80);

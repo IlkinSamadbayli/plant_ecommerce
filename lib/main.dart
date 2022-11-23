@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:plant_ecommerce/presentation/screens/onboard/onboard_screen.dart';
+import 'package:plant_ecommerce/presentation/screens/login/login_page.dart';
 import 'package:plant_ecommerce/providers/provider.dart';
 import 'package:plant_ecommerce/themes/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Plant-Ecommerce',
-      theme: appTheme,
-      home: const OnboardPage(),
+      theme: AppThemes.appTheme,
+      home: const LoginPage(),
       //  email==null||email==''? const LoginPage(): const HomeScreen(),
     );
   }

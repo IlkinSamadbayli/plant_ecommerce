@@ -18,10 +18,8 @@ import 'package:plant_ecommerce/presentation/screens/forgot_password/lock_screen
 import 'package:plant_ecommerce/presentation/screens/sign_up/gender_selection.dart';
 
 class AccountSetup extends StatefulWidget {
-  final TextEditingController mailController;
   const AccountSetup({
     Key? key,
-    required this.mailController,
   }) : super(key: key);
 
   @override
@@ -38,6 +36,7 @@ class _AccountSetupState extends State<AccountSetup> {
   late TextEditingController dateController;
   late TextEditingController numberController;
   late TextEditingController genderController;
+  late TextEditingController mailController;
   late TextEditingController passwordController;
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
@@ -53,7 +52,6 @@ class _AccountSetupState extends State<AccountSetup> {
   bool isCorrectNumber = false;
   late bool checkboxOne = false;
   late bool checkboxTwo = false;
-
   DateTime selectedDate = DateTime.now();
 
   Future<void> selectDate(BuildContext context) async {
@@ -71,6 +69,7 @@ class _AccountSetupState extends State<AccountSetup> {
 
   @override
   void initState() {
+    mailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
     nickController = TextEditingController();
@@ -202,52 +201,42 @@ class _AccountSetupState extends State<AccountSetup> {
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
-                      shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40),
-                        ),
-                      ),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(36))),
                       context: context,
                       builder: (context) {
-                        return Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        GlobalBorderStyle.borderRadius40),
-                                padding: AppSize.paddingH25,
-                                child: DatePickerWidget(
-                                    initialDate: DateTime.now(),
-                                    onConfirm: (dateTime, selectedIndex) {},
-                                    looping: false, // default is not looping
-                                    firstDate: DateTime(
-                                        1920 - 01 - 01), //DateTime(1960),
-                                    lastDate: DateTime.now(),
-                                    dateFormat: "yyyy/MMMM/dd",
-                                    onChange: (DateTime currentDate, _) {
-                                      setState(() {
-                                        dateController.text = currentDate
-                                            .toString()
-                                            .split(' ')[0];
-                                      });
-                                    },
-                                    pickerTheme: DateTimePickerTheme(
-                                      itemTextStyle:
-                                          CustomTextStyle.littleStyle,
-                                    )),
-                              ),
-                              AppSize.sizeHeight40,
-                              GlobalButton(
-                                text: "Select birthday",
-                                onTap: () {
-                                  Get.back();
+                        return ListView(
+                          shrinkWrap: true,
+                          children: [
+                            AppSize.sizeHeight50,
+                            DatePickerWidget(
+                                initialDate: DateTime.now(),
+                                onConfirm: (dateTime, selectedIndex) {},
+                                looping: false, // default is not looping
+                                firstDate:
+                                    DateTime(1920 - 01 - 01), //DateTime(1960),
+                                lastDate: DateTime.now(),
+                                dateFormat: "yyyy/MMMM/dd",
+                                onChange: (DateTime currentDate, _) {
+                                  setState(() {
+                                    dateController.text =
+                                        currentDate.toString().split(' ')[0];
+                                  });
                                 },
-                              ),
-                            ],
-                          ),
+                                pickerTheme: DateTimePickerTheme(
+                                  itemTextStyle:
+                                      CustomTextStyle.littleStyleItalic,
+                                )),
+                            AppSize.sizeHeight20,
+                            GlobalButton(
+                              text: "Select birthday",
+                              onTap: () {
+                                Get.back();
+                              },
+                            ),
+                            AppSize.sizeHeight20,
+                          ],
                         );
                       },
                     );
@@ -270,7 +259,7 @@ class _AccountSetupState extends State<AccountSetup> {
                 GlobalInput(
                   enabled: true,
                   labelText: "Your email",
-                  controller: widget.mailController,
+                  controller: mailController,
                   isPassword: false,
                   validator: emailValidator,
                   prefixIcon: Icon(Icons.mail, color: AppColor.primaryColor),
@@ -343,6 +332,7 @@ class _AccountSetupState extends State<AccountSetup> {
                     }
                   },
                 ),
+                AppSize.sizeHeight30
               ],
             ),
           ),
@@ -351,8 +341,3 @@ class _AccountSetupState extends State<AccountSetup> {
     );
   }
 }
-
-// void getNumber(String phoneNumber) async {
-//   PhoneNumber number =
-//   await PhoneNumber.getRegionInfoFromPhoneNumber('707422421', 'AZE');
-// }

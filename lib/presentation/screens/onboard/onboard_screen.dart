@@ -45,7 +45,7 @@ class _OnboardPageState extends State<OnboardPage> {
             "Your satisfaction is our number one priority",
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 50),
             child: centerPage(
               Image.asset(GlobalAssets.onboard_3),
               "Let's Shop Your Fovarite Plants With Patea Now",
@@ -54,7 +54,7 @@ class _OnboardPageState extends State<OnboardPage> {
         ],
       ),
       bottomSheet: Container(
-        padding: AppSize.paddingH8,
+        padding: AppSize.padding20x10,
         height: 130,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,17 +84,17 @@ class _OnboardPageState extends State<OnboardPage> {
 
 Widget centerPage(Image image, String text) {
   return Padding(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 60,
-      vertical: 80,
-    ),
+    padding: AppSize.padding60x60,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        AppSize.sizeHeight8,
-        image,
-        AppSize.sizeHeight60,
+        AppSize.sizeHeight16,
+        Padding(
+          padding: AppSize.padding30x30,
+          child: image,
+        ),
+        AppSize.sizeHeight40,
         Text(
           text,
           style: CustomTextStyle.standardStyleItalic,
