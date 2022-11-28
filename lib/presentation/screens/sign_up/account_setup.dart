@@ -4,22 +4,26 @@ import 'package:flutter_holo_date_picker/date_picker_theme.dart';
 import 'package:flutter_holo_date_picker/widget/date_picker_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:plant_ecommerce/constants/sizedbox.dart';
-import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
-import 'package:plant_ecommerce/presentation/global_widgets/global_validators.dart';
-import 'package:plant_ecommerce/styles/colors/app_colors.dart';
-import 'package:plant_ecommerce/styles/styles/border_style.dart';
-import 'package:plant_ecommerce/styles/styles/text_style.dart';
+import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
+import 'package:plant_ecommerce/presentation/global_widgets/global_validators.dart';
 import 'package:plant_ecommerce/presentation/screens/forgot_password/lock_screen.dart';
 import 'package:plant_ecommerce/presentation/screens/sign_up/gender_selection.dart';
+import 'package:plant_ecommerce/presentation/screens/sign_up/sign_up_screen.dart';
+import 'package:plant_ecommerce/styles/colors/app_colors.dart';
+import 'package:plant_ecommerce/styles/styles/border_style.dart';
+import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
 class AccountSetup extends StatefulWidget {
+    final TextEditingController mailController;
   const AccountSetup({
     Key? key,
+    required this.mailController,
   }) : super(key: key);
 
   @override
@@ -36,8 +40,8 @@ class _AccountSetupState extends State<AccountSetup> {
   late TextEditingController dateController;
   late TextEditingController numberController;
   late TextEditingController genderController;
-  late TextEditingController mailController;
   late TextEditingController passwordController;
+
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
   late FocusNode nameFocus;
@@ -54,6 +58,8 @@ class _AccountSetupState extends State<AccountSetup> {
   late bool checkboxTwo = false;
   DateTime selectedDate = DateTime.now();
 
+  SignUp signup = const SignUp();
+
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -69,7 +75,6 @@ class _AccountSetupState extends State<AccountSetup> {
 
   @override
   void initState() {
-    mailController = TextEditingController();
     passwordController = TextEditingController();
     nameController = TextEditingController();
     nickController = TextEditingController();
@@ -259,7 +264,7 @@ class _AccountSetupState extends State<AccountSetup> {
                 GlobalInput(
                   enabled: true,
                   labelText: "Your email",
-                  controller: mailController,
+                  controller: widget.mailController,
                   isPassword: false,
                   validator: emailValidator,
                   prefixIcon: Icon(Icons.mail, color: AppColor.primaryColor),

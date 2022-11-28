@@ -107,7 +107,7 @@ class LockScreenState extends State<LockScreen> {
 
   Widget get numberpad {
     return Padding(
-      padding: AppSize.padding32x32x10,
+      padding: AppSize.padding32x32x15,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

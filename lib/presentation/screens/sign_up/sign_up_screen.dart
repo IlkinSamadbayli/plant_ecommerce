@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     context.snackbarSuccessMessage;
-                    Get.to(() => const AccountSetup());
+                    Get.to(() => AccountSetup(mailController: emailController));
                   } else {
                     context.snackbarErrorMessage;
                   }

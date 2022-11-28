@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/data/login_data.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
+import 'package:plant_ecommerce/presentation/screens/login/login_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
@@ -14,6 +15,7 @@ import 'package:plant_ecommerce/presentation/screens/sign_up/sign_up_screen.dart
 import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController passwordController;
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
-  bool isChecked = false;
+  // bool isChecked = false;
   bool isTrueMail = false;
   bool isTruePassword = false;
 
@@ -81,59 +83,60 @@ class _LoginPageState extends State<LoginPage> {
                     style: CustomTextStyle.standardStyle,
                   ),
                   AppSize.sizeHeight16,
-                  Column(children: [
-                    GlobalInput(
-                      enabled: true,
-                      labelText: "Your email",
-                      controller: mailController,
-                      isPassword: false,
-                      validator: (mail) {
-                        if (mail == '') {
-                          return "Please fill your email";
-                        } else {
-                          return null;
-                        }
-                      },
-                      prefixIcon: const Icon(Icons.mail),
-                      isCorrect: isTrueMail,
-                      onChanged: (mail) {
-                        emailOnChanged(mail, isTrueMail);
-                      },
-                      textFocus: emailFocus,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    GlobalInput(
-                      enabled: true,
-                      labelText: "Your password",
-                      controller: passwordController,
-                      isPassword: true,
-                      validator: passwordValidator,
-                      prefixIcon: const Icon(Icons.lock),
-                      isCorrect: isTruePassword,
-                      onChanged: (p0) {
-                        emailOnChanged(p0, isTruePassword);
-                        setState(() {});
-                      },
-                      textFocus: passwordFocus,
-                      keyboardType: TextInputType.text,
-                    ),
-                  ]),
+                  Column(
+                    children: [
+                      GlobalInput(
+                        enabled: true,
+                        labelText: "Your email",
+                        controller: mailController,
+                        isPassword: false,
+                        validator: (mail) {
+                          if (mail == '') {
+                            return "Please fill your email";
+                          } else {
+                            return null;
+                          }
+                        },
+                        prefixIcon: const Icon(Icons.mail),
+                        isCorrect: isTrueMail,
+                        onChanged: (mail) {
+                          emailOnChanged(mail, isTrueMail);
+                        },
+                        textFocus: emailFocus,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      GlobalInput(
+                        enabled: true,
+                        labelText: "Your password",
+                        controller: passwordController,
+                        isPassword: true,
+                        validator: passwordValidator,
+                        prefixIcon: const Icon(Icons.lock),
+                        isCorrect: isTruePassword,
+                        onChanged: (p0) {
+                          passwordOnChanged(p0, isTruePassword);
+                        },
+                        textFocus: passwordFocus,
+                        keyboardType: TextInputType.text,
+                      ),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Checkbox(
-                        shape: const CircleBorder(),
-                        activeColor: AppColor.primaryColor,
-                        value: isChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            isChecked = !isChecked;
-                          });
-                        },
-                      ),
-                      Text(
-                        'Remember me',
-                        style: CustomTextStyle.tinyStyleItalic,
+                      Consumer<LoginProvider>(
+                        builder: (_, appProvider, child) => Checkbox(
+                          shape: const CircleBorder(),
+                          activeColor: AppColor.primaryColor,
+                          value: appProvider.isChecked,
+                          onChanged: (value) {
+                            appProvider.checkbox;
+                          },
+                        ),
+                        child: Text(
+                          'Remember me',
+                          style: CustomTextStyle.tinyStyleItalic,
+                        ),
                       ),
                     ],
                   ),

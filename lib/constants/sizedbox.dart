@@ -46,8 +46,8 @@ class AppSize {
   static EdgeInsetsGeometry get paddingH35 =>
       const EdgeInsets.symmetric(horizontal: 35);
 
-  static EdgeInsetsGeometry get padding32x32x10 =>
-      const EdgeInsets.only(right: 32, left: 32, top: 10);
+  static EdgeInsetsGeometry get padding32x32x15 =>
+      const EdgeInsets.only(right: 32, left: 32, top: 15);
 
   static EdgeInsetsGeometry get padding8x6x6 =>
       const EdgeInsets.only(left: 8, top: 6, bottom: 6);
@@ -94,6 +94,7 @@ class AppSize {
   static EdgeInsetsGeometry get padding20x120 =>
       const EdgeInsets.symmetric(vertical: 20, horizontal: 120);
 
+  static EdgeInsetsGeometry get paddingAll40 => const EdgeInsets.all(40);
   static EdgeInsetsGeometry get paddingAll24 => const EdgeInsets.all(24);
   static EdgeInsetsGeometry get paddingAll16 => const EdgeInsets.all(16);
   static EdgeInsetsGeometry get paddingAll5 => const EdgeInsets.all(5);
