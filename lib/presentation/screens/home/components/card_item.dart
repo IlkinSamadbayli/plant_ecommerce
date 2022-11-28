@@ -5,12 +5,9 @@ import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
-// ignore: must_be_immutable
 class CardItem extends StatefulWidget {
-  ProductModel item;
-  // final List<String> favoriteCard;
-  // late int likedCard = 0;
-  CardItem({
+final  ProductModel item;
+  const CardItem({
     Key? key,
     required this.item,
     // required this.favoriteCard,

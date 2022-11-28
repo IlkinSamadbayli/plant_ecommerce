@@ -8,7 +8,7 @@ import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/data/product_data.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/providers/provider.dart';
+import 'package:plant_ecommerce/presentation/screens/home/components/provider/home_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
@@ -33,7 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
     filterController = TextEditingController();
     super.initState();
   }
-
+ @override
+  void dispose() {
+    filterFocus.dispose();
+    filterController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Consumer<AppProvider>(
+                Consumer<HomeProvider>(
                   builder: (context, value, child) => GestureDetector(
                       onTap: () {
                         value.notificationAppbar;
@@ -86,42 +91,43 @@ class _HomeScreenState extends State<HomeScreen> {
                           : const Icon(Icons.notifications_none_sharp,
                               size: 32)),
                 ),
-                AppSize.sizeWidth16,
-                Consumer<AppProvider>(
+                Consumer<HomeProvider>(
                   builder: (context, appProvider, child) => GestureDetector(
                     onTap: () {
                       appProvider.likedAppbarHome;
                     },
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          Icons.favorite,
-                          size: 32,
-                          color: appProvider.isLiked
-                              ? AppColor.errorColor
-                              : AppColor.versionColorWhite,
-                        ),
-                        Positioned(
-                          right: -3,
-                          top: -2,
-                          child: ClipOval(
-                            child: Container(
-                              width: 14,
-                              height: 14,
-                              decoration: BoxDecoration(
-                                color: AppColor.errorColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Text(
-                                "21",
-                                style: TextStyle(fontSize: 12),
-                                textAlign: TextAlign.center,
+                    child: Expanded(
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Icon(
+                            Icons.favorite,
+                            size: 32,
+                            color: appProvider.isLiked
+                                ? AppColor.errorColor
+                                : AppColor.versionColorWhite,
+                          ),
+                          Positioned(
+                            right: 2,
+                            top: -2,
+                            child: ClipOval(
+                              child: Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  color: AppColor.errorColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Text(
+                                  "21",
+                                  style: TextStyle(fontSize: 12),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -138,18 +144,20 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CarouselSlider.builder(
                   itemCount: 3,
-                  itemBuilder: (context, i, realIndex) => Stack(
-                    children: [
-                      Image.asset("./assets/images/carusel_${i + 1}.png"),
-                      Positioned(
-                        bottom: 16,
-                        left: 70,
-                        child: Text(
-                          "Amount %20",
-                          style: CustomTextStyle.standardStyleBold,
+                  itemBuilder: (context, i, realIndex) => Expanded(
+                    child: Stack(
+                      children: [
+                        Image.asset("./assets/images/carusel_${i + 1}.png"),
+                        Positioned(
+                          bottom: 16,
+                          left: 70,
+                          child: Text(
+                            "Amount %20",
+                            style: CustomTextStyle.standardStyleBold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   options: CarouselOptions(
                     autoPlay: true,
@@ -159,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             // CarouselSlider(
-
+    
             //   items: [ExactAssetImage('images/06.jpg')],
             // ),
             AppSize.sizeHeight10,

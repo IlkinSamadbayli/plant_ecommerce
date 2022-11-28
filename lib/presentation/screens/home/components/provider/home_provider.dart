@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppProvider extends ChangeNotifier {
+class HomeProvider extends ChangeNotifier {
   bool isLiked = false;
   bool isNotificationOpen = false;
 

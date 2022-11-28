@@ -113,7 +113,7 @@ class VerifyScreenState extends State<VerifyScreen> {
   Widget get numberpad {
     return Expanded(
       child: Padding(
-        padding: AppSize.padding32x32x10,
+        padding: AppSize.padding32x32x15,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -170,25 +170,22 @@ class VerifyScreenState extends State<VerifyScreen> {
 }
 
 Widget timer() {
-  return Padding(
-    padding: const EdgeInsets.all(40),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Resend code in",
-          style: CustomTextStyle.tinyStyle,
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+        "Resend code in",
+        style: CustomTextStyle.tinyStyle,
+      ),
+      TweenAnimationBuilder(
+        tween: Tween<double>(begin: 30, end: 0),
+        duration: const Duration(seconds: 30),
+        builder: (_, value, child) => Text(
+          "00: ${value.toDouble().toStringAsFixed(0)}",
+          style: CustomTextStyle.tinyStyleGray,
         ),
-        TweenAnimationBuilder(
-          tween: Tween<double>(begin: 30, end: 0),
-          duration: const Duration(seconds: 30),
-          builder: (_, value, child) => Text(
-            "00: ${value.toDouble().toStringAsFixed(0)}",
-            style: CustomTextStyle.tinyStyleGray,
-          ),
-          onEnd: () {},
-        )
-      ],
-    ),
+        onEnd: () {},
+      )
+    ],
   );
 }
