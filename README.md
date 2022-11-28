@@ -1,4 +1,5 @@
 # plant_ecommerce
+![Splash Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/splash.png)
 ![Onboard Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/onboard_screen.png)
 ![Enterence Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/enterance_screen.png)
 ![Forgot Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/forgot_screen.png)
