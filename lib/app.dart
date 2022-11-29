@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant_ecommerce/presentation/screens/forgot_password/lock_screen.dart';
 import 'package:plant_ecommerce/presentation/screens/login/login_provider.dart';
-import 'package:plant_ecommerce/presentation/screens/onboard/onboard_screen.dart';
 import 'package:plant_ecommerce/presentation/screens/sign_up/provider/register_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Plant-Ecommerce',
         theme: AppThemes.appTheme,
-        home: const OnboardPage(),
+        home: const LockScreen(),
         //  email==null||email==''? const LoginPage(): const HomeScreen(),
       ),
     );

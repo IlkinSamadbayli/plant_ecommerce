@@ -201,6 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ),
+                AppSize.sizeHeight16
               ],
             ),
           ),

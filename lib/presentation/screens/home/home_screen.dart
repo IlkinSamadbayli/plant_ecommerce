@@ -13,12 +13,7 @@ import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
 class HomeScreen extends StatefulWidget {
-  // int index;
-  const HomeScreen({
-    Key? key,
-    // required this.index,
-  }) : super(key: key);
-
+  const HomeScreen({Key? key}) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -27,21 +22,26 @@ class _HomeScreenState extends State<HomeScreen> {
   ProductData data = ProductData();
   late FocusNode filterFocus;
   late TextEditingController filterController;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     filterFocus = FocusNode();
     filterController = TextEditingController();
     super.initState();
   }
- @override
+
+  @override
   void dispose() {
     filterFocus.dispose();
     filterController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         leading: Container(
           margin: AppSize.padding8x6x6,
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : AppColor.versionColorWhite,
                           ),
                           Positioned(
-                            right: 2,
+                            right: -2,
                             top: -2,
                             child: ClipOval(
                               child: Container(
@@ -136,77 +136,83 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AppSize.sizeHeight10,
-            Column(
+      body: GestureDetector(
+        onTap: () {
+          if(filterFocus.hasFocus){
+            filterFocus.unfocus();
+          }
+        },
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
               children: [
-                CarouselSlider.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, i, realIndex) => Expanded(
-                    child: Stack(
-                      children: [
-                        Image.asset("./assets/images/carusel_${i + 1}.png"),
-                        Positioned(
-                          bottom: 16,
-                          left: 70,
-                          child: Text(
-                            "Amount %20",
-                            style: CustomTextStyle.standardStyleBold,
-                          ),
+                AppSize.sizeHeight10,
+                Column(
+                  children: [
+                    CarouselSlider.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, i, realIndex) => Expanded(
+                        child: Stack(
+                          children: [
+                            Image.asset("./assets/images/carusel_${i + 1}.png"),
+                            Positioned(
+                              bottom: 16,
+                              left: 70,
+                              child: Text(
+                                "Amount %20",
+                                style: CustomTextStyle.standardStyleBold,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 4 / 3,
+                      ),
                     ),
-                  ),
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 4 / 3,
+                  ],
+                ),
+                AppSize.sizeHeight10,
+                GlobalInput(
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: const Icon(Icons.format_list_bulleted_sharp),
+                  hintText: "Search",
+                  isPassword: false,
+                  keyboardType: TextInputType.name,
+                  isCorrect: true,
+                  onChanged: (v) {},
+                  controller: filterController,
+                  textFocus: filterFocus,
+                  enabled: true,
+                ),
+                AppSize.sizeHeight10,
+                Padding(
+                  padding: AppSize.paddingH35,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Special offers',
+                        style: CustomTextStyle.littleStyleBold,
+                      ),
+                      Text(
+                        'See all',
+                        style: CustomTextStyle.tinyStyleGreenBold,
+                      ),
+                    ],
                   ),
                 ),
+                CardsWidget(index: -1),
+                AppSize.sizeHeight10,
+                CardsWidget(index: 2),
+                AppSize.sizeHeight10,
+                CardsWidget(index: 5),
+                AppSize.sizeHeight10,
               ],
             ),
-            // CarouselSlider(
-    
-            //   items: [ExactAssetImage('images/06.jpg')],
-            // ),
-            AppSize.sizeHeight10,
-            GlobalInput(
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: const Icon(Icons.format_list_bulleted_sharp),
-              hintText: "Search",
-              isPassword: false,
-              keyboardType: TextInputType.name,
-              isCorrect: true,
-              onChanged: (v) {},
-              controller: filterController,
-              textFocus: filterFocus,
-              enabled: true,
-            ),
-            AppSize.sizeHeight10,
-            Padding(
-              padding: AppSize.paddingH35,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Special offers',
-                    style: CustomTextStyle.littleStyleBold,
-                  ),
-                  Text(
-                    'See all',
-                    style: CustomTextStyle.tinyStyleGreenBold,
-                  ),
-                ],
-              ),
-            ),
-            CardsWidget(index: -1),
-            AppSize.sizeHeight10,
-            CardsWidget(index: 2),
-            AppSize.sizeHeight10,
-            CardsWidget(index: 5),
-            AppSize.sizeHeight10,
-          ],
+          ),
         ),
       ),
     );

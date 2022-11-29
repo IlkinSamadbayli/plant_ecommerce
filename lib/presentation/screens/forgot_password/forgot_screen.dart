@@ -24,72 +24,64 @@ class _ForgotPasswordScreen extends State<ForgotScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Scaffold(
-        key: scaffoldKey,
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Consumer<LockProvider>(
-              builder: (context, value, child) => Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: AppSize.paddingAll24,
-                    child: Text(
-                      'Forgot Password',
-                      style: CustomTextStyle.standardStyle,
-                    ),
-                  ),
-                  Image.asset(
-                    GlobalAssets.forgot,
-                    width: 500,
-                    height: 350,
-                  ),
-                  Container(
-                    padding: AppSize.paddingH20,
-                    child: Text(
-                      "Select which contact details should we use to reset your password",
-                      style: CustomTextStyle.tinyStyleGray,
-                    ),
-                  ),
-                  AppSize.sizeHeight16,
-                  VerifyWidget(
-                      isSelected: value.isSelectNumber,
-                      ontap: () {
-                        value.sendMessage(isMail: false);
-                      },
-                      image: Image.asset(GlobalAssets.threeDots, width: 50),
-                      isMail: false),
-                  VerifyWidget(
-                      isSelected: value.isSelectMail,
-                      ontap: () {
-                        value.sendMessage(isMail: true);
-                      },
-                      image: Image.asset(GlobalAssets.verify, width: 50),
-                      isMail: true),
-                  AppSize.sizeHeight20,
-                  GlobalButton(
-                    text: 'Continue',
-                    onTap: () {
-                      if (value.isSelectMail == false &&
-                          value.isSelectNumber == false) {
-                        context.snackBarMessage(
-                          color: AppColor.errorColor,
-                          text: "You should select via mail or number",
-                        );
-                      } else {
-                        if (value.isSelectMail == false) {
-                          Get.to(() => const VerifyScreen(isMail: false));
-                        } else if (value.isSelectMail = true) {
-                          Get.to(() => const VerifyScreen(isMail: true));
-                        }
-                      }
-                    },
-                  ),
-                  AppSize.sizeHeight20
-                ],
+    return Scaffold(
+      key: scaffoldKey,
+      body: SingleChildScrollView(
+        child: Consumer<LockProvider>(
+          builder: (context, value, child) => Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: AppSize.padding24x24x40,
+                child: Text(
+                  'Forgot Password',
+                  style: CustomTextStyle.standardStyle,
+                ),
               ),
-            ),
+              Image.asset(
+                GlobalAssets.forgot,
+                width: 500,
+                height: 300,
+              ),
+              Container(
+                padding: AppSize.paddingH20,
+                child: Text(
+                  "Select which contact details should we use to reset your password",
+                  style: CustomTextStyle.tinyStyleGray,
+                ),
+              ),
+              AppSize.sizeHeight16,
+              VerifyWidget(
+                  isSelected: value.isSelectNumber,
+                  ontap: () {
+                    value.sendMessage(isMail: false);
+                  },
+                  image: Image.asset(GlobalAssets.threeDots, width: 50),
+                  isMail: false),
+              VerifyWidget(
+                  isSelected: value.isSelectMail,
+                  ontap: () {
+                    value.sendMessage(isMail: true);
+                  },
+                  image: Image.asset(GlobalAssets.verify, width: 50),
+                  isMail: true),
+              AppSize.sizeHeight16,
+              GlobalButton(
+                text: 'Continue',
+                onTap: () {
+                  if (value.isSelectMail == false &&
+                      value.isSelectNumber == false) {
+                    context.snackBarMessage(
+                      color: AppColor.errorColor,
+                      text: "You should select via mail or number",
+                    );
+                  } else {
+                    Get.to(() => const VerifyScreen());
+                  }
+                },
+              ),
+              AppSize.sizeHeight20
+            ],
           ),
         ),
       ),
