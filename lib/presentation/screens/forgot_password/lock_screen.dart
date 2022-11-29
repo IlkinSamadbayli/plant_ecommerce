@@ -145,8 +145,6 @@ class LockScreenState extends State<LockScreen> {
                 } else {
                   setPin(number, false);
                 }
-                // print("inputPincount: $inputPinCount");
-                // print("currentPin: $currentPin");
               },
               child: Center(
                 child: Text(

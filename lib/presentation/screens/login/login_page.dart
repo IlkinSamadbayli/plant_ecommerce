@@ -4,6 +4,7 @@ import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/data/login_data.dart';
 import 'package:plant_ecommerce/global/snackbar/snackbar.dart';
 import 'package:plant_ecommerce/presentation/screens/login/login_provider.dart';
+import 'package:plant_ecommerce/provider/onchanged_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
@@ -14,7 +15,6 @@ import 'package:plant_ecommerce/presentation/screens/onboard/widgets/social_netw
 import 'package:plant_ecommerce/presentation/screens/sign_up/sign_up_screen.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_button.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/presentation/global_widgets/global_onchanged.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,26 +66,26 @@ class _LoginPageState extends State<LoginPage> {
             passwordFocus.unfocus();
           }
         },
-        child: Form(
-          key: formKey,
-          child: SingleChildScrollView(
-            child: Expanded(
-              child: Column(
-                children: [
-                  AppSize.sizeHeight80,
-                  Padding(
-                    padding: AppSize.paddingH110,
-                    child: Image.asset(GlobalAssets.login_2),
-                  ),
-                  AppSize.sizeHeight30,
-                  Text(
-                    "Login to Your Account",
-                    style: CustomTextStyle.standardStyle,
-                  ),
-                  AppSize.sizeHeight16,
-                  Column(
-                    children: [
-                      GlobalInput(
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                AppSize.sizeHeight80,
+                Padding(
+                  padding: AppSize.paddingH110,
+                  child: Image.asset(GlobalAssets.login_2),
+                ),
+                AppSize.sizeHeight30,
+                Text(
+                  "Login to Your Account",
+                  style: CustomTextStyle.standardStyle,
+                ),
+                AppSize.sizeHeight16,
+                Column(
+                  children: [
+                    Consumer<OnchangedProvider>(
+                      builder: (context, value, child) => GlobalInput(
                         enabled: true,
                         labelText: "Your email",
                         controller: mailController,
@@ -100,12 +100,14 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: const Icon(Icons.mail),
                         isCorrect: isTrueMail,
                         onChanged: (mail) {
-                          emailOnChanged(mail, isTrueMail);
+                          value.emailOnChanged(mail, isTrueMail);
                         },
                         textFocus: emailFocus,
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      GlobalInput(
+                    ),
+                    Consumer<OnchangedProvider>(
+                      builder: (context, value, child) => GlobalInput(
                         enabled: true,
                         labelText: "Your password",
                         controller: passwordController,
@@ -114,91 +116,92 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: const Icon(Icons.lock),
                         isCorrect: isTruePassword,
                         onChanged: (p0) {
-                          passwordOnChanged(p0, isTruePassword);
+                          value.passwordOnChanged(p0, isTruePassword);
                         },
                         textFocus: passwordFocus,
                         keyboardType: TextInputType.text,
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Consumer<LoginProvider>(
-                        builder: (_, appProvider, child) => Checkbox(
-                          shape: const CircleBorder(),
-                          activeColor: AppColor.primaryColor,
-                          value: appProvider.isChecked,
-                          onChanged: (value) {
-                            appProvider.checkbox;
-                          },
-                        ),
-                        child: Text(
-                          'Remember me',
-                          style: CustomTextStyle.tinyStyleItalic,
-                        ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Consumer<LoginProvider>(
+                      builder: (_, appProvider, child) => Checkbox(
+                        shape: const CircleBorder(),
+                        activeColor: AppColor.primaryColor,
+                        value: appProvider.isChecked,
+                        onChanged: (value) {
+                          appProvider.checkbox;
+                        },
                       ),
-                    ],
-                  ),
-                  GlobalButton(
-                    text: 'Sign in',
-                    onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        var token = await LoginData.loginData(
-                            mailController.text, passwordController.text);
-                        if (token is String) {
-                          SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          sharedPreferences.setString(
-                              "email", mailController.text);
-                          Get.to(() => const HomeScreen());
-                          // "eve.holt@reqres.in"
-                          context.snackbarSuccessMessage;
-                        }
-                      } else {
-                        context.snackbarErrorMessage;
-                      }
-                    },
-                  ),
-                  AppSize.sizeHeight32,
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const ForgotPassword());
-                    },
-                    child: Text(
-                      'Forgot the password?',
+                    ),
+                    Text(
+                      'Remember me',
                       style: CustomTextStyle.tinyStyleItalic,
                     ),
+                  ],
+                ),
+                GlobalButton(
+                  text: 'Sign in',
+                  onTap: () async {
+                    if (formKey.currentState!.validate()) {
+                      var token = await LoginData.loginData(
+                          mailController.text, passwordController.text);
+                      if (token is String) {
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.setString(
+                            "email", mailController.text);
+                        Get.to(() => const HomeScreen());
+                        // "eve.holt@reqres.in"
+                        context.snackbarSuccessMessage;
+                      }
+                    } else {
+                      context.snackbarErrorMessage;
+                    }
+                  },
+                ),
+                AppSize.sizeHeight32,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const ForgotScreen());
+                  },
+                  child: Text(
+                    'Forgot the password?',
+                    style: CustomTextStyle.tinyStyleItalic,
                   ),
-                  AppSize.sizeHeight16,
-                  Text(
-                    'or continue with',
-                    style: CustomTextStyle.tinyStyleGray,
-                  ),
-                  Padding(
-                    padding: AppSize.paddingAll24,
-                    child: const SocialNetwork(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Dont have an account?',
-                          style: CustomTextStyle.tinyStyleItalic),
-                      AppSize.sizeWidth4,
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const SignUp());
-                        },
-                        child: Text(
-                          'Sign up',
-                          style: CustomTextStyle.tinyStyleBold
-                              .copyWith(color: AppColor.primaryColor),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                AppSize.sizeHeight16,
+                Text(
+                  'or continue with',
+                  style: CustomTextStyle.tinyStyleGray,
+                ),
+                Padding(
+                  padding: AppSize.paddingAll24,
+                  child: const SocialNetwork(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Dont have an account?',
+                        style: CustomTextStyle.tinyStyleItalic),
+                    AppSize.sizeWidth4,
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const SignUp());
+                      },
+                      child: Text(
+                        'Sign up',
+                        style: CustomTextStyle.tinyStyleBold
+                            .copyWith(color: AppColor.primaryColor),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
         ),
