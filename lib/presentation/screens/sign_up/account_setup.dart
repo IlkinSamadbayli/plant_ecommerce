@@ -116,24 +116,24 @@ class _AccountSetupState extends State<AccountSetup> {
       key: scaffoldKey,
       body: GestureDetector(
         onTap: () {
-              if (emailFocus.hasFocus) {
+          if (emailFocus.hasFocus) {
             emailFocus.unfocus();
           } else if (passwordFocus.hasFocus) {
             passwordFocus.unfocus();
-          }else if (numberFocus.hasFocus) {
+          } else if (numberFocus.hasFocus) {
             numberFocus.unfocus();
-          }else if (nickFocus.hasFocus) {
+          } else if (nickFocus.hasFocus) {
             nickFocus.unfocus();
-          }else if (nameFocus.hasFocus) {
+          } else if (nameFocus.hasFocus) {
             nameFocus.unfocus();
-          }else if (dateFocus.hasFocus) {
+          } else if (dateFocus.hasFocus) {
             dateFocus.unfocus();
           }
         },
-        child: Form(
-          key: formKey,
-          child: SafeArea(
-            child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: SafeArea(
               child: Column(
                 children: [
                   Container(
@@ -224,8 +224,8 @@ class _AccountSetupState extends State<AccountSetup> {
                     onTap: () {
                       showModalBottomSheet(
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(36))),
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(36))),
                         context: context,
                         builder: (context) {
                           return ListView(
@@ -236,8 +236,8 @@ class _AccountSetupState extends State<AccountSetup> {
                                   initialDate: DateTime.now(),
                                   onConfirm: (dateTime, selectedIndex) {},
                                   looping: false, // default is not looping
-                                  firstDate:
-                                      DateTime(1920 - 01 - 01), //DateTime(1960),
+                                  firstDate: DateTime(
+                                      1920 - 01 - 01), //DateTime(1960),
                                   lastDate: DateTime.now(),
                                   dateFormat: "yyyy/MMMM/dd",
                                   onChange: (DateTime currentDate, _) {
@@ -285,7 +285,8 @@ class _AccountSetupState extends State<AccountSetup> {
                       controller: widget.mailController,
                       isPassword: false,
                       validator: emailValidator,
-                      prefixIcon: Icon(Icons.mail, color: AppColor.primaryColor),
+                      prefixIcon:
+                          Icon(Icons.mail, color: AppColor.primaryColor),
                       isCorrect: isCorrectMail,
                       onChanged: (mail) {
                         value.emailOnChanged(mail, isCorrectMail);
