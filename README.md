@@ -2,6 +2,7 @@
 ![Splash Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/splash_screen.png)
 ![Onboard Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/onboard_screen.png)
 ![Enterence Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/enterance_screen.png)
+![Enterence Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/login_screen.png)
 ![Forgot Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/forgot_screen.png)
 ![Verify Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/lock_screen.png)
 ![Verify Screen](https://github.com/IlkinSamadbayli/plant_ecommerce/blob/main/assets/ui_screens/verify_screen.png)
