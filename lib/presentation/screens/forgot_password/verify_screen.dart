@@ -67,7 +67,7 @@ class VerifyScreen extends StatelessWidget {
                 text: "Verify",
                 onTap: () {
                   if (value.currentPin == '4321') {
-                    Get.to(() => const HomeScreen());
+                    Get.off(() => const HomeScreen());
                   } else {
                     context.snackbarErrorMessage;
                   }

@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController filterController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     filterFocus = FocusNode();
@@ -96,38 +97,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       appProvider.likedAppbarHome;
                     },
-                    child: Expanded(
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Icon(
-                            Icons.favorite,
-                            size: 32,
-                            color: appProvider.isLiked
-                                ? AppColor.errorColor
-                                : AppColor.versionColorWhite,
-                          ),
-                          Positioned(
-                            right: -2,
-                            top: -2,
-                            child: ClipOval(
-                              child: Container(
-                                width: 14,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  color: AppColor.errorColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Text(
-                                  "21",
-                                  style: TextStyle(fontSize: 12),
-                                  textAlign: TextAlign.center,
-                                ),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          size: 32,
+                          color: appProvider.isLiked
+                              ? AppColor.errorColor
+                              : AppColor.versionColorWhite,
+                        ),
+                        Positioned(
+                          right: -2,
+                          top: -2,
+                          child: ClipOval(
+                            child: Container(
+                              width: 14,
+                              height: 14,
+                              decoration: BoxDecoration(
+                                color: AppColor.errorColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Text(
+                                "21",
+                                style: TextStyle(fontSize: 12),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -136,43 +135,37 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: GestureDetector(
-        onTap: () {
-          if(filterFocus.hasFocus){
-            filterFocus.unfocus();
-          }
-        },
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
+      body: Form(
+        key: formKey,
+        child: GestureDetector(
+          onTap: () {
+            if (filterFocus.hasFocus) {
+              filterFocus.unfocus();
+            }
+          },
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                AppSize.sizeHeight10,
-                Column(
-                  children: [
-                    CarouselSlider.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, i, realIndex) => Expanded(
-                        child: Stack(
-                          children: [
-                            Image.asset("./assets/images/carusel_${i + 1}.png"),
-                            Positioned(
-                              bottom: 16,
-                              left: 70,
-                              child: Text(
-                                "Amount %20",
-                                style: CustomTextStyle.standardStyleBold,
-                              ),
-                            ),
-                          ],
+                // AppSize.sizeHeight10,
+                CarouselSlider.builder(
+                  itemCount: 3,
+                  itemBuilder: (context, i, realIndex) => Stack(
+                    children: [
+                      Image.asset("./assets/images/carusel_${i + 1}.png"),
+                      Positioned(
+                        bottom: 16,
+                        left: 70,
+                        child: Text(
+                          "Amount %20",
+                          style: CustomTextStyle.standardStyleBold,
                         ),
                       ),
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        aspectRatio: 4 / 3,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 4 / 3,
+                  ),
                 ),
                 AppSize.sizeHeight10,
                 GlobalInput(

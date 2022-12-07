@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             await SharedPreferences.getInstance();
                         sharedPreferences.setString(
                             "email", mailController.text);
-                        Get.to(() => const HomeScreen());
+                        Get.off(() => const HomeScreen());
                         // "eve.holt@reqres.in"
                         context.snackbarSuccessMessage;
                       }
