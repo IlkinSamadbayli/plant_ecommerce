@@ -15,20 +15,17 @@ class CardsWidget extends StatelessWidget {
       padding: AppSize.paddingH15,
       child: SizedBox(
         height: 240,
-        child: Expanded(
-          child: ListView.separated(
-            physics: const ClampingScrollPhysics(),
-            // padding: AppSize.paddingH15,
-            separatorBuilder: (context, _) => AppSize.sizeWidth10,
-            itemCount: 3,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, _) {
-              index++;
-              return CardItem(
-                item: ProductData.items[index],
-              );
-            },
-          ),
+        child: ListView.separated(
+          physics: const ClampingScrollPhysics(),
+          separatorBuilder: (__, _) => AppSize.sizeWidth10,
+          itemCount: 3,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (__, _) {
+            index++;
+            return CardItem(
+              item: ProductData.items[index],
+            );
+          },
         ),
       ),
     );

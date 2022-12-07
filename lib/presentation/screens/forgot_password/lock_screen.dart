@@ -64,7 +64,7 @@ class LockScreen extends StatelessWidget {
                 text: "Continue",
                 onTap: () {
                   if (value.currentPin == '1234') {
-                    Get.to(() => const HomeScreen());
+                    Get.off(() => const HomeScreen());
                   } else {
                     context.snackbarErrorMessage;
                   }
