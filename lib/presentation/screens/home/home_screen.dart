@@ -5,7 +5,6 @@ import 'package:plant_ecommerce/presentation/screens/home/components/cards_widge
 import 'package:provider/provider.dart';
 
 import 'package:plant_ecommerce/constants/sizedbox.dart';
-import 'package:plant_ecommerce/data/product_data.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
 import 'package:plant_ecommerce/presentation/screens/home/components/provider/home_provider.dart';
@@ -19,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ProductData data = ProductData();
   late FocusNode filterFocus;
   late TextEditingController filterController;
   final formKey = GlobalKey<FormState>();
@@ -95,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Consumer<HomeProvider>(
                   builder: (context, appProvider, child) => GestureDetector(
                     onTap: () {
-                      appProvider.likedAppbarHome;
+                      appProvider.addFavor;
                     },
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -103,29 +101,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(
                           Icons.favorite,
                           size: 32,
-                          color: appProvider.isLiked
-                              ? AppColor.errorColor
-                              : AppColor.versionColorWhite,
+                          color: AppColor.versionColorWhite,
                         ),
-                        Positioned(
-                          right: -2,
-                          top: -2,
-                          child: ClipOval(
-                            child: Container(
-                              width: 14,
-                              height: 14,
-                              decoration: BoxDecoration(
-                                color: AppColor.errorColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Text(
-                                "21",
-                                style: TextStyle(fontSize: 12),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        )
+                        appProvider.favorCards.isNotEmpty
+                            ? Positioned(
+                                right: -2,
+                                top: -2,
+                                child: ClipOval(
+                                  child: Container(
+                                    width: 14,
+                                    height: 14,
+                                    decoration: BoxDecoration(
+                                      color: AppColor.errorColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Text(
+                                      appProvider.favorCards.length.toString(),
+                                      style: const TextStyle(fontSize: 12),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                   ),
@@ -197,14 +195,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                CardsWidget(index: -1),
-                AppSize.sizeHeight10,
-                CardsWidget(index: 2),
-                AppSize.sizeHeight10,
-                CardsWidget(index: 5),
-                AppSize.sizeHeight10,
+
+                const CardsWidget(),
               ],
             ),
+            // AppSize.sizeHeight10,
           ),
         ),
       ),

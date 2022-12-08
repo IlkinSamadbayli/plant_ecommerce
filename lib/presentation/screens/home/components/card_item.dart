@@ -1,27 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/model/product_model.dart';
+import 'package:plant_ecommerce/presentation/screens/home/components/provider/home_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
 
-class CardItem extends StatefulWidget {
-final  ProductModel item;
+class CardItem extends StatelessWidget {
+  final ProductModel item;
+  final int index;
   const CardItem({
     Key? key,
     required this.item,
-    // required this.favoriteCard,
+    required this.index,
   }) : super(key: key);
   @override
-  State<CardItem> createState() => _CardItemState();
-}
-
-class _CardItemState extends State<CardItem> {
-  bool isFavorite = false;
-  @override
   Widget build(BuildContext context) {
-    // var name = names.map((name) => name).toList();
-    // var image = images.map((e) => e).toString();
     return Stack(
       children: [
         Card(
@@ -39,16 +36,14 @@ class _CardItemState extends State<CardItem> {
               children: [
                 Padding(
                   padding: AppSize.paddingAll5,
-                  child: Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 4 / 3,
-                      child: widget.item.image,
-                    ),
+                  child: AspectRatio(
+                    aspectRatio: 4 / 3,
+                    child: item.image,
                   ),
                 ),
                 AppSize.sizeHeight8,
                 Text(
-                  widget.item.title,
+                  item.title,
                   style: CustomTextStyle.tinyStyleBold,
                 ),
                 Row(
@@ -61,7 +56,7 @@ class _CardItemState extends State<CardItem> {
                     ),
                     AppSize.sizeWidth4,
                     Text(
-                      widget.item.rated,
+                      item.rated,
                       style: CustomTextStyle.tinyStyleGray,
                     ),
                     AppSize.sizeWidth8,
@@ -74,7 +69,7 @@ class _CardItemState extends State<CardItem> {
                         border: Border.all(width: 1, color: AppColor.mainColor),
                       ),
                       child: Text(
-                        "${widget.item.sold} sold",
+                        "${item.sold} sold",
                         style: CustomTextStyle.moreTinyStyleGreen,
                       ),
                     )
@@ -91,12 +86,12 @@ class _CardItemState extends State<CardItem> {
                   children: [
                     AppSize.sizeWidth10,
                     Text(
-                      " \$${widget.item.price}",
+                      " \$${item.price}",
                       style: CustomTextStyle.littleStylelineThroughItalic,
                       textAlign: TextAlign.end,
                     ),
                     Text(
-                      " \$${(widget.item.price * 0.8).toStringAsFixed(1)}",
+                      " \$${(item.price * 0.8).toStringAsFixed(1)}",
                       style: CustomTextStyle.littleStyleGreenItalic,
                       textAlign: TextAlign.end,
                     ),
@@ -109,14 +104,16 @@ class _CardItemState extends State<CardItem> {
         Positioned(
           right: 0,
           bottom: 0,
-          child: IconButton(
-            onPressed: () => setState(() {
-              isFavorite = !isFavorite;
-              // widget.likedCard + 1;
-            }),
-            icon: Icon(
-              Icons.favorite,
-              color: isFavorite ? AppColor.errorColor : AppColor.waterColor,
+          child: Consumer<HomeProvider>(
+            builder: (context, value, child) => IconButton(
+              onPressed: () {
+                value.addFavor(item);
+              },
+              icon: Icon(
+                Icons.favorite,
+                color:
+                    item.isFavorite ? AppColor.errorColor : AppColor.waterColor,
+              ),
             ),
           ),
         ),

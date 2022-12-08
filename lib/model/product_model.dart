@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 
 class ProductModel {
+  bool isFavorite;
   Image image;
   String title;
   String sold;
   String rated;
   int price;
   ProductModel({
+    this.isFavorite = false,
     required this.image,
     required this.title,
     required this.sold,
