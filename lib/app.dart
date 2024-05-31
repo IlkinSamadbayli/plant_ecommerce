@@ -6,7 +6,7 @@ import 'package:plant_ecommerce/presentation/screens/sign_up/provider/register_p
 import 'package:provider/provider.dart';
 
 import 'presentation/screens/forgot_password/provider/lock_screen_provider.dart';
-import 'presentation/screens/home/components/provider/home_provider.dart';
+import 'presentation/screens/home/components/home_provider.dart';
 import 'provider/onchanged_provider.dart';
 import 'themes/app_themes.dart';
 

@@ -1,10 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/model/product_model.dart';
-import 'package:plant_ecommerce/presentation/screens/home/components/provider/home_provider.dart';
+import 'package:plant_ecommerce/presentation/screens/home/components/home_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/border_style.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';

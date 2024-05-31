@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController passwordController;
   late FocusNode emailFocus;
   late FocusNode passwordFocus;
-  // bool isChecked = false;
   bool isTrueMail = false;
   bool isTruePassword = false;
 
