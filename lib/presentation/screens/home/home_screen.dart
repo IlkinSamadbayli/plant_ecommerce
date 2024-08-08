@@ -4,11 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/global/global_assets/global_assets.dart';
 import 'package:plant_ecommerce/presentation/global_widgets/global_input.dart';
-import 'package:plant_ecommerce/presentation/screens/home/components/home_provider.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
 import 'package:plant_ecommerce/styles/styles/text_style.dart';
-
-import 'cards_widget.dart';
+import 'home_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -194,8 +192,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-
-                const CardsWidget(),
               ],
             ),
             // AppSize.sizeHeight10,

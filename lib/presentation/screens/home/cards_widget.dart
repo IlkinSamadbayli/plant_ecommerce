@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
-import 'package:plant_ecommerce/presentation/screens/home/components/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'card_item.dart';
+import 'home_provider.dart';
 
 class CardsWidget extends StatelessWidget {
   const CardsWidget({Key? key}) : super(key: key);

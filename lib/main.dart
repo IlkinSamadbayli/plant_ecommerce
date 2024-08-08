@@ -6,7 +6,7 @@ import 'app.dart';
 String? email;
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   await getPreference();
   runApp(const MyApp());
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:plant_ecommerce/constants/sizedbox.dart';
 import 'package:plant_ecommerce/styles/colors/app_colors.dart';
@@ -12,7 +11,7 @@ class NumberPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Expanded(
+    return Expanded(
       child: Padding(
         padding: AppSize.padding32x32x15,
         child: Consumer<LockProvider>(

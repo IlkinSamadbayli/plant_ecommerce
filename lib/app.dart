@@ -4,9 +4,8 @@ import 'package:plant_ecommerce/presentation/screens/login/login_provider.dart';
 import 'package:plant_ecommerce/presentation/screens/onboard/onboard_screen.dart';
 import 'package:plant_ecommerce/presentation/screens/sign_up/provider/register_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'presentation/screens/forgot_password/provider/lock_screen_provider.dart';
-import 'presentation/screens/home/components/home_provider.dart';
+import 'presentation/screens/home/home_provider.dart';
 import 'provider/onchanged_provider.dart';
 import 'themes/app_themes.dart';
 
